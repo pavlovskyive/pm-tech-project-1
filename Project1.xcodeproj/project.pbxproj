@@ -24,6 +24,8 @@
 		79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3D25B2DF4800761D31 /* Planet.swift */; };
 		79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4025B2E04B00761D31 /* TimeHandler.swift */; };
 		79C26E4425B2E07900761D31 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* ViewModel.swift */; };
+		79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B225B309850001F60E /* SolarSystemsViewController.swift */; };
+		79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		79C26E3D25B2DF4800761D31 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		79C26E4025B2E04B00761D31 /* TimeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHandler.swift; sourceTree = "<group>"; };
 		79C26E4325B2E07900761D31 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		79F520B225B309850001F60E /* SolarSystemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsViewController.swift; sourceTree = "<group>"; };
+		79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 			children = (
 				7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */,
 				79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */,
+				79F520B225B309850001F60E /* SolarSystemsViewController.swift */,
+				79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,6 +221,8 @@
 				79C26E3B25B2DF3100761D31 /* Star.swift in Sources */,
 				7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */,
 				79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */,
+				79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */,
+				79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */,
 				794F29A725B05698007FF79F /* Galaxy.swift in Sources */,
 				794F298D25B03548007FF79F /* AppDelegate.swift in Sources */,
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,

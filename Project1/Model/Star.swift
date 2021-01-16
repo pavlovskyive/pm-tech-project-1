@@ -34,3 +34,16 @@ class Star {
         radiusThreshold = solarSystem?.galaxy?.universe?.blackHoleThresholdRadius ?? 60
     }
 }
+
+extension Star {
+    private func increaseAge() {
+        age += 1
+    }
+}
+
+extension Star: TimeHandler {
+    
+    func handleTick() {
+        increaseAge()
+    }
+}

@@ -67,6 +67,8 @@ class RoundedCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    let gradientLayer = CAGradientLayer()
+    
     // MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,6 +78,11 @@ class RoundedCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        contentView.frame = bounds
+        gradientLayer.frame = bounds
     }
 }
 
@@ -87,7 +94,7 @@ extension RoundedCollectionViewCell {
         translatesAutoresizingMaskIntoConstraints = false
         
         roundCorner()
-        gradientBackgroundColor()
+        setGradientBackgroundColor(colorOne: .systemPurple, colorTwo: .systemIndigo)
         setCellShadow()
         
         self.addSubview(iconImageView)
@@ -124,24 +131,31 @@ extension RoundedCollectionViewCell {
     }
     
     func setCellShadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 1)
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowRadius = 1.0
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = 3
-        self.clipsToBounds = false
+        layer.needsDisplayOnBoundsChange = true
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 1.0
+        layer.masksToBounds = false
+        layer.cornerRadius = 3
+        clipsToBounds = false
     }
     
-    func gradientBackgroundColor() {
-        self.contentView.setGradientBackgroundColor(colorOne: .systemPurple, colorTwo: .systemIndigo)
+    func setGradientBackgroundColor(colorOne: UIColor, colorTwo: UIColor) {
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.cornerRadius = 3
+        
+        contentView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func roundCorner() {
-        self.contentView.layer.cornerRadius = 12
-        self.contentView.layer.masksToBounds = true
-        self.contentView.layer.borderWidth = 1
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.cornerRadius = 12
+        contentView.layer.masksToBounds = true
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.clear.cgColor
     }
 }
-

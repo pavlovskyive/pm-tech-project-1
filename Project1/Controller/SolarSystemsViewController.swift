@@ -1,27 +1,24 @@
 //
-//  UniversesViewController.swift
+//  SolarSystemsViewController.swift
 //  Project1
 //
-//  Created by Vsevolod Pavlovskyi on 15.01.2021.
+//  Created by Vsevolod Pavlovskyi on 16.01.2021.
 //
 
 import UIKit
 
-class UniversesViewController: UIViewController {
-    
-    private let viewModel = UniversesViewModel()
-    
-    lazy private var timer: RepeatingTimer = {
-        RepeatingTimer(timeInterval: 1)
-    }()
+class SolarSystemsViewController: UIViewController {
+
+    weak var galaxy: Galaxy?
+    weak var timer: RepeatingTimer?
     
     lazy private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
-//        layout.itemSize = CGSize(
-//            width: (view.frame.width / 2) - 20,
-//            height: 140)
-//
+        layout.itemSize = CGSize(
+            width: (view.frame.width / 2) - 20,
+            height: 140)
+        
         layout.scrollDirection = .vertical
         
         layout.sectionInset = UIEdgeInsets(
@@ -33,7 +30,7 @@ class UniversesViewController: UIViewController {
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     
-    private var galaxiesViewController: GalaxiesViewController?
+    private var solarSystemDetailedViewController: SolarSystemDetailedViewController?
     
     lazy private var segmentedControl: UISegmentedControl = {
         let playImage = UIImage(systemName: "play")!
@@ -42,7 +39,7 @@ class UniversesViewController: UIViewController {
         
         let segmentedControl: UISegmentedControl = UISegmentedControl(items: [pauseImage, playImage, maxSpeedImage])
         segmentedControl.sizeToFit()
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = timer?.state.rawValue ?? 1
         
         segmentedControl.addTarget(self, action: #selector(handleSegmentedControllValueChanged), for: .valueChanged)
         
@@ -51,28 +48,31 @@ class UniversesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
+
         setupNavigationBarController()
         setupCollectionView()
-        setupTimer()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Made so we don't update UI of next view controller if it's not on the screen
-        galaxiesViewController = nil
+        solarSystemDetailedViewController = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        segmentedControl.selectedSegmentIndex = timer.state.rawValue
+        segmentedControl.selectedSegmentIndex = timer?.state.rawValue ?? 1
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
-extension UniversesViewController {
+extension SolarSystemsViewController {
     
     fileprivate func setupNavigationBarController() {
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -81,18 +81,13 @@ extension UniversesViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         
-        navigationItem.setRightBarButton(
-            UIBarButtonItem(
-                barButtonSystemItem: .add,
-                target: self,
-                action: #selector(handleAddButton)),
-            animated: true)
-        
         self.navigationItem.titleView = segmentedControl
         
+        title = "\(galaxy?.name ?? "")"
     }
     
     fileprivate func setupCollectionView() {
+        
         collectionView.backgroundColor = .systemBackground
         collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
         collectionView.alwaysBounceVertical = true
@@ -109,18 +104,12 @@ extension UniversesViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
-    func setupTimer() {
-        timer.eventHandler = handleTick
-        timer.resume()
-    }
 }
 
-extension UniversesViewController {
+extension SolarSystemsViewController: TimeHandler {
     
     @objc func handleTick() {
-        viewModel.handleTick()
-        galaxiesViewController?.handleTick()
+        solarSystemDetailedViewController?.handleTick()
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -128,46 +117,19 @@ extension UniversesViewController {
     }
 }
 
-extension UniversesViewController {
+extension SolarSystemsViewController {
     
     @objc func handleSegmentedControllValueChanged() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            timer.suspend()
+            timer?.suspend()
         case 1:
-            timer.resume()
+            timer?.resume()
         case 2:
-            timer.faster()
+            timer?.faster()
         default:
             break
         }
-    }
-    
-    @objc func handleAddButton() {
-        let alertController = UIAlertController(title: "Universe Creation", message: "Enter New Universe Name", preferredStyle: .alert)
-        
-        alertController.addTextField()
-        
-        let submitAction = UIAlertAction(title: "Submit", style: .default) { _ in
-            let answer = alertController.textFields![0]
-            let text = answer.text ?? ""
-            
-//            self.viewModel.createUniverse(
-//                name: text,
-//                blackHoleThresholdMass: 50,
-//                blackHoleThresholdRadius: 50)
-            self.viewModel.createUniverse(name: text)
-            
-            self.collectionView.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alertController.addAction(submitAction)
-        alertController.addAction(cancelAction)
-        alertController.view.layoutIfNeeded()
-        
-        present(alertController, animated: true)
     }
     
     @objc func handleEditButton() {
@@ -175,10 +137,10 @@ extension UniversesViewController {
     }
 }
 
-extension UniversesViewController: UICollectionViewDataSource {
+extension SolarSystemsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.universes.count
+        galaxy?.solarSystems.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -192,26 +154,45 @@ extension UniversesViewController: UICollectionViewDataSource {
             action: #selector(handleEditButton),
             for: .touchUpInside)
         
-        cell.titleLabel.text = viewModel.universes[indexPath.row].name
-        cell.secondaryLabel.text = "Age: \(viewModel.universes[indexPath.row].age)"
+        let solarSystem = galaxy?.solarSystems[indexPath.row]
+        
+        let name = solarSystem?.name
+        let age = solarSystem?.age ?? 0
+//        let type = solarSystem?.type.rawValue ?? "Spiral"
+        let mass = solarSystem?.mass ?? 0
+        
+        var image: UIImage
+        
+        switch galaxy?.type {
+        case .spiral:
+            image = UIImage(systemName: "hurricane")!
+        case .elliptical:
+            image = UIImage(systemName: "record.circle")!
+        default:
+            image = UIImage(systemName: "aqi.low")!
+        }
+        
+        cell.titleLabel.text = name
+        cell.secondaryLabel.text = "Age: \(age)\nMass: \(mass)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
+        cell.iconImageView.image = image
         
         return cell
     }
 }
 
-extension UniversesViewController: UICollectionViewDelegate {
+extension SolarSystemsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        galaxiesViewController = GalaxiesViewController()
+        solarSystemDetailedViewController = SolarSystemDetailedViewController()
         
-        galaxiesViewController!.timer = timer
-        galaxiesViewController!.universe = viewModel.universes[indexPath.row]
-        navigationController?.pushViewController(galaxiesViewController!, animated: true)
+        solarSystemDetailedViewController!.timer = timer
+        solarSystemDetailedViewController!.solarSystem = galaxy?.solarSystems[indexPath.row]
+        navigationController?.pushViewController(solarSystemDetailedViewController!, animated: true)
     }
 }
 
-extension UniversesViewController: UICollectionViewDelegateFlowLayout {
+extension SolarSystemsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(

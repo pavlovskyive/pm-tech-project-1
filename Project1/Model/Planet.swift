@@ -12,9 +12,13 @@ class Planet {
     private(set) var age: UInt = 0
     
 //    private(set) var type: PlanetType
-    private(set) var mass: UInt
+    private(set) var selfMass: UInt
     private(set) var temperature: UInt
     private(set) var radius: UInt
+    
+    var mass: UInt {
+        sattelites.reduce(selfMass) { $0 + $1.mass }
+    }
     
     weak var hostPlanet: Planet? = nil
     weak var solarSystem: SolarSystem?
@@ -24,7 +28,7 @@ class Planet {
     init(name: String, hostPlanet: Planet?) {
         self.name = name
         
-        mass = UInt.random(in: 1...100)
+        selfMass = UInt.random(in: 1...100)
         temperature = UInt.random(in: 1...100)
         radius = UInt.random(in: 1...100)
         
@@ -40,5 +44,18 @@ class Planet {
                     hostPlanet: self))
             sattelitesNumber -= 1
         }
+    }
+}
+
+extension Planet {
+    private func increaseAge() {
+        age += 1
+    }
+}
+
+extension Planet: TimeHandler {
+    
+    func handleTick() {
+        increaseAge()
     }
 }

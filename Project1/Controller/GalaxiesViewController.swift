@@ -30,6 +30,8 @@ class GalaxiesViewController: UIViewController {
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     
+    private var solarSystemsViewController: SolarSystemsViewController?
+    
     lazy private var segmentedControl: UISegmentedControl = {
         let playImage = UIImage(systemName: "play")!
         let pauseImage = UIImage(systemName: "pause")!
@@ -51,10 +53,22 @@ class GalaxiesViewController: UIViewController {
         setupCollectionView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Made so we don't update UI of next view controller if it's not on the screen
+        solarSystemsViewController = nil
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         segmentedControl.selectedSegmentIndex = timer?.state.rawValue ?? 1
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
@@ -77,6 +91,7 @@ extension GalaxiesViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
         collectionView.alwaysBounceVertical = true
+        collectionView.delegate = self
         collectionView.dataSource = self
         
         view.addSubview(collectionView)
@@ -94,6 +109,8 @@ extension GalaxiesViewController {
 extension GalaxiesViewController: TimeHandler {
     
     @objc func handleTick() {
+        self.solarSystemsViewController?.handleTick()
+        
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -164,3 +181,22 @@ extension GalaxiesViewController: UICollectionViewDataSource {
     }
 }
 
+extension GalaxiesViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        solarSystemsViewController = SolarSystemsViewController()
+        
+        solarSystemsViewController!.timer = timer
+        solarSystemsViewController!.galaxy = universe?.galaxies[indexPath.row]
+        navigationController?.pushViewController(solarSystemsViewController!, animated: true)
+    }
+}
+
+extension GalaxiesViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(
+            width: (view.frame.width / 2) - 20,
+            height: 140)
+    }
+}

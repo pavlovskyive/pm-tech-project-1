@@ -50,5 +50,9 @@ extension SolarSystem: TimeHandler {
         if age % 10 == 1 && planets.count < 9 {
             newPlanet()
         }
+        
+        star.handleTick()
+        
+        planets.forEach { $0.handleTick() }
     }
 }
