@@ -26,16 +26,27 @@ class Universe {
 }
 
 extension Universe {
-    func increaseAge() {
+    private func increaseAge() {
         age += 1
     }
     
-    func newGalaxy() {
+    private func newGalaxy() {
         let galaxy = Galaxy(name: "Galaxy \(galaxies.count + 1)")
         galaxy.universe = self
         galaxies.append(galaxy)
+    }
+    
+    private func handleGalaxiesCollision() {
+        var suitableGalaxies = galaxies.indices.filter { galaxies[$0].age >= 3 * 60 }.shuffled()
         
-        print("New galaxy in \(name): \(galaxy.name) ")
+        guard suitableGalaxies.count >= 2 else {
+            return
+        }
+        
+        suitableGalaxies = Array(suitableGalaxies.prefix(2)).sorted { galaxies[$0].mass > galaxies[$1].mass }
+        galaxies[suitableGalaxies[0]].collide(with: galaxies[suitableGalaxies[1]])
+        
+        galaxies.remove(at: suitableGalaxies[1])
     }
 }
 
@@ -45,6 +56,10 @@ extension Universe: TimeHandler {
         
         if age % 10 == 1 {
             newGalaxy()
+        }
+        
+        if age % 30 == 1 {
+            handleGalaxiesCollision()
         }
         
         let queue = OperationQueue()

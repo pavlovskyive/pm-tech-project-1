@@ -7,11 +7,19 @@
 
 import Foundation
 
+enum PlanetType: String, CaseIterable {
+    case terrestrial = "Terrestial"
+    case gasGiant = "Gas Giant"
+    case iceGiant = "Ice Giant"
+    case dwarf = "Dwarf"
+}
+
 class Planet {
+    
     private(set) var name: String
     private(set) var age: UInt = 0
     
-//    private(set) var type: PlanetType
+    private(set) var type = PlanetType.allCases.randomElement()!
     private(set) var selfMass: UInt
     private(set) var temperature: UInt
     private(set) var radius: UInt
@@ -37,6 +45,7 @@ class Planet {
         }
         
         var sattelitesNumber = Int.random(in: 0...5)
+        
         while sattelitesNumber > 0 {
             sattelites.append(
                 Planet(

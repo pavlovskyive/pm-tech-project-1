@@ -75,7 +75,7 @@ class RepeatingTimer {
             fallthrough
         case .suspended:
             state = .faster
-            timeInterval = 0.2
+            timeInterval = 0.01
             timer = setTimer()
             timer.resume()
         default:

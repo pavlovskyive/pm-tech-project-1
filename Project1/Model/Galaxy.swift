@@ -41,8 +41,16 @@ extension Galaxy {
         let solarSystem = SolarSystem(name: "Solar System \(solarSystems.count + 1)")
         solarSystem.galaxy = self
         solarSystems.append(solarSystem)
+    }
+    
+    func collide(with galaxy: Galaxy) {
+        print("Galaxy (mass \(mass)) collides with galaxy (mass: \(galaxy.mass))")
         
-        print("New Solar System in \(name): \(solarSystem.name)")
+        galaxy.solarSystems.forEach { $0.galaxy = self }
+        solarSystems.append(contentsOf: galaxy.solarSystems)
+        galaxy.solarSystems = []
+
+        solarSystems.removeSubrange(0..<solarSystems.count / 10)
     }
 }
 

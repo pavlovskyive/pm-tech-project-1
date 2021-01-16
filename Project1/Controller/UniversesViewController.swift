@@ -70,6 +70,12 @@ class UniversesViewController: UIViewController {
         
         segmentedControl.selectedSegmentIndex = timer.state.rawValue
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        print("Received memory warning")
+    }
 }
 
 extension UniversesViewController {

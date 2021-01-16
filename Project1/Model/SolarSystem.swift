@@ -37,8 +37,6 @@ extension SolarSystem {
         let planet = Planet(name: "Planet \(planets.count + 1)", hostPlanet: nil)
         planet.solarSystem = self
         planets.append(planet)
-        
-        print("New Planet in \(name): \(planet.name)")
     }
 }
 
