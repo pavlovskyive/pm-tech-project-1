@@ -7,15 +7,22 @@
 
 import Foundation
 
-class Universe {
+final class Universe {
     
+    // MARK: - Variables
+    
+    // Universe name.
     private(set) var name: String
+    
+    // Age is used for time based methods.
     private(set) var age: UInt = 0
     
     private(set) var blackHoleThresholdMass: UInt
     private(set) var blackHoleThresholdRadius: UInt
     
     private(set) var galaxies = [Galaxy]()
+    
+    // MARK: - Lifecycle
     
     init(name: String, blackHoleThresholdMass: UInt, blackHoleThresholdRadius: UInt) {
         self.name = name
@@ -26,52 +33,65 @@ class Universe {
 }
 
 extension Universe {
+    
+    // MARK: - Methods
+    
+    // Increase age of current Universe.
     private func increaseAge() {
         age += 1
     }
     
+    // Create new Galaxy in current Universe.
     private func newGalaxy() {
         let galaxy = Galaxy(name: "Galaxy \(galaxies.count + 1)")
+        
         galaxy.universe = self
         galaxies.append(galaxy)
     }
     
+    // Handle Galaxies Collision
     private func handleGalaxiesCollision() {
+        
+        // TODO: Redo asynchronously
+        
+        // Get Galaxies with life time more than 3 minutes in random order.
         var suitableGalaxies = galaxies.indices.filter { galaxies[$0].age >= 3 * 60 }.shuffled()
         
+        // Check if there are more than 2 suitable Galaxies.
         guard suitableGalaxies.count >= 2 else {
             return
         }
         
+        // Get 2 first random Galaxies and sort them by mass descending.
         suitableGalaxies = Array(suitableGalaxies.prefix(2)).sorted { galaxies[$0].mass > galaxies[$1].mass }
+        
+        // Call collide method on bigger Galaxy with smaller Galaxy.
         galaxies[suitableGalaxies[0]].collide(with: galaxies[suitableGalaxies[1]])
         
+        // Remove destroyed galaxy.
         galaxies.remove(at: suitableGalaxies[1])
     }
 }
 
 extension Universe: TimeHandler {
+    
+    // MARK: - Chain of Responsibility
+    
     func handleTick() {
+        
+        // Increase age of current Universe.
         increaseAge()
         
+        // Create new Galaxy every 10 seconds.
         if age % 10 == 1 {
             newGalaxy()
         }
         
+        // Collide random 2 Galaxies with life time more that 3 minutes each 30 second.
         if age % 30 == 1 {
             handleGalaxiesCollision()
         }
         
-        let queue = OperationQueue()
-        
-        for galaxy in galaxies {
-            queue.addOperation {
-                galaxy.handleTick()
-            }
-        }
-        
-        queue.waitUntilAllOperationsAreFinished()
-        
-//        galaxies.forEach { $0.handleTick() }
+        galaxies.forEach { $0.handleTick() }
     }
 }

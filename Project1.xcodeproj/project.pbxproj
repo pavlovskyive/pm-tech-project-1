@@ -15,7 +15,6 @@
 		794F299625B0354B007FF79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794F299525B0354B007FF79F /* Assets.xcassets */; };
 		794F299925B0354B007FF79F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794F299725B0354B007FF79F /* LaunchScreen.storyboard */; };
 		794F29A725B05698007FF79F /* Galaxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F29A625B05698007FF79F /* Galaxy.swift */; };
-		794F29AC25B056DB007FF79F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F29AB25B056DB007FF79F /* Storage.swift */; };
 		794F29B325B058D8007FF79F /* Universe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F29B225B058D8007FF79F /* Universe.swift */; };
 		796A0F2325B4144A00DA3F9F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F2225B4144A00DA3F9F /* CollectionViewFlowLayout.swift */; };
 		79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */; };
@@ -39,7 +38,6 @@
 		794F299825B0354B007FF79F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		794F299A25B0354B007FF79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		794F29A625B05698007FF79F /* Galaxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Galaxy.swift; sourceTree = "<group>"; };
-		794F29AB25B056DB007FF79F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		794F29B225B058D8007FF79F /* Universe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Universe.swift; sourceTree = "<group>"; };
 		796A0F2225B4144A00DA3F9F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystem.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 		794F29AA25B056BC007FF79F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				794F29AB25B056DB007FF79F /* Storage.swift */,
 				7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */,
 				79C26E4025B2E04B00761D31 /* TimeHandler.swift */,
 			);
@@ -279,7 +276,6 @@
 				79C26E4425B2E07900761D31 /* AppModel.swift in Sources */,
 				79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */,
 				7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */,
-				794F29AC25B056DB007FF79F /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

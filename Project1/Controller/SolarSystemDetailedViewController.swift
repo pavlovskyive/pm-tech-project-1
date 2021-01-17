@@ -147,7 +147,6 @@ extension SolarSystemDetailedViewController: UICollectionViewDataSource {
         let planet = solarSystem?.planets[indexPath.row]
         
         let name = planet?.name
-        let age = planet?.age ?? 0
 //        let type = solarSystem?.type.rawValue ?? "Spiral"
         let mass = planet?.mass ?? 0
         
@@ -163,7 +162,7 @@ extension SolarSystemDetailedViewController: UICollectionViewDataSource {
 //        }
         
         cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Age: \(age)\nMass: \(mass)"
+        cell.secondaryLabel.text = "Mass: \(mass)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
 //        cell.iconImageView.image = image
         
