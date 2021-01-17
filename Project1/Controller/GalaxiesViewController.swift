@@ -12,23 +12,7 @@ class GalaxiesViewController: UIViewController {
     weak var universe: Universe?
     weak var timer: RepeatingTimer?
     
-    lazy private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.itemSize = CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
-        
-        layout.scrollDirection = .vertical
-        
-        layout.sectionInset = UIEdgeInsets(
-            top: 15,
-            left: 15,
-            bottom: 15,
-            right: 15)
-        
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
+    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayout())
     
     private var solarSystemsViewController: SolarSystemsViewController?
     
@@ -93,6 +77,7 @@ extension GalaxiesViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         view.addSubview(collectionView)
         
@@ -189,14 +174,5 @@ extension GalaxiesViewController: UICollectionViewDelegate {
         solarSystemsViewController!.timer = timer
         solarSystemsViewController!.galaxy = universe?.galaxies[indexPath.row]
         navigationController?.pushViewController(solarSystemsViewController!, animated: true)
-    }
-}
-
-extension GalaxiesViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
     }
 }

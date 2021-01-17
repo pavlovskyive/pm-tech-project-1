@@ -15,19 +15,21 @@ class UniversesViewController: UIViewController {
         RepeatingTimer(timeInterval: 1)
     }()
     
-    lazy private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.scrollDirection = .vertical
-        
-        layout.sectionInset = UIEdgeInsets(
-            top: 15,
-            left: 15,
-            bottom: 15,
-            right: 15)
-        
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
+//    lazy private var collectionView: UICollectionView = {
+//        let layout = CollectionViewFlowLayout()
+//
+//        layout.scrollDirection = .vertical
+//
+//        layout.sectionInset = UIEdgeInsets(
+//            top: 15,
+//            left: 15,
+//            bottom: 15,
+//            right: 15)
+//
+//        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+//    }()
+    
+    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayout())
     
     private var galaxiesViewController: GalaxiesViewController?
     
@@ -100,6 +102,7 @@ extension UniversesViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         view.addSubview(collectionView)
         
@@ -210,14 +213,5 @@ extension UniversesViewController: UICollectionViewDelegate {
         galaxiesViewController!.timer = timer
         galaxiesViewController!.universe = appModel.universes[indexPath.row]
         navigationController?.pushViewController(galaxiesViewController!, animated: true)
-    }
-}
-
-extension UniversesViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
     }
 }

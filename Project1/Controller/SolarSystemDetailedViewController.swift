@@ -12,26 +12,7 @@ class SolarSystemDetailedViewController: UIViewController {
     weak var solarSystem: SolarSystem?
     weak var timer: RepeatingTimer?
     
-    lazy private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        
-//        layout.itemSize = CGSize(
-//            width: (view.bounds.width / 2) - 20,
-//            height: 140)
-        layout.headerReferenceSize = CGSize(
-            width: view.bounds.width - 20,
-            height: 120)
-        
-        layout.scrollDirection = .vertical
-        
-        layout.sectionInset = UIEdgeInsets(
-            top: 15,
-            left: 0,
-            bottom: 15,
-            right: 0)
-        
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
+    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayoutWithHeader())
     
     lazy private var segmentedControl: UISegmentedControl = {
         let playImage = UIImage(systemName: "play")!
@@ -81,7 +62,6 @@ extension SolarSystemDetailedViewController {
         collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
         collectionView.register(RoundedCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "StarCell")
         collectionView.alwaysBounceVertical = true
-        collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.contentInset = UIEdgeInsets(
@@ -188,15 +168,6 @@ extension SolarSystemDetailedViewController: UICollectionViewDataSource {
 //        cell.iconImageView.image = image
         
         return cell
-    }
-}
-
-extension SolarSystemDetailedViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
     }
 }
 

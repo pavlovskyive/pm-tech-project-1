@@ -12,23 +12,7 @@ class SolarSystemsViewController: UIViewController {
     weak var galaxy: Galaxy?
     weak var timer: RepeatingTimer?
     
-    lazy private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.itemSize = CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
-        
-        layout.scrollDirection = .vertical
-        
-        layout.sectionInset = UIEdgeInsets(
-            top: 15,
-            left: 15,
-            bottom: 15,
-            right: 15)
-        
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
+    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayout())
     
     private var solarSystemDetailedViewController: SolarSystemDetailedViewController?
     
@@ -93,6 +77,7 @@ extension SolarSystemsViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         view.addSubview(collectionView)
         
@@ -189,14 +174,5 @@ extension SolarSystemsViewController: UICollectionViewDelegate {
         solarSystemDetailedViewController!.timer = timer
         solarSystemDetailedViewController!.solarSystem = galaxy?.solarSystems[indexPath.row]
         navigationController?.pushViewController(solarSystemDetailedViewController!, animated: true)
-    }
-}
-
-extension SolarSystemsViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
-            width: (view.frame.width / 2) - 20,
-            height: 140)
     }
 }
