@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RoundedCollectionViewCell: UICollectionViewCell {
+final class RoundedCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
 
@@ -63,7 +63,7 @@ class RoundedCollectionViewCell: UICollectionViewCell {
     
     private let gradientLayer = CAGradientLayer()
     
-    // MARK:- Lifecycle
+    // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)

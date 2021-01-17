@@ -10,6 +10,7 @@
 		7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */; };
 		7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */; };
 		7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */; };
+		79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */; };
 		794F298D25B03548007FF79F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298C25B03548007FF79F /* AppDelegate.swift */; };
 		794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298E25B03548007FF79F /* SceneDelegate.swift */; };
 		794F299625B0354B007FF79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794F299525B0354B007FF79F /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesViewController.swift; sourceTree = "<group>"; };
 		7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionViewCell.swift; sourceTree = "<group>"; };
+		79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSegmentedControl.swift; sourceTree = "<group>"; };
 		794F298925B03548007FF79F /* Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794F298C25B03548007FF79F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		794F298E25B03548007FF79F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */,
 				796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */,
+				79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,
 				79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */,
 				796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */,
+				79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */,
 				79C26E4425B2E07900761D31 /* AppModel.swift in Sources */,
 				79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */,
 				7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */,

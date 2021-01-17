@@ -80,8 +80,11 @@ extension Galaxy {
         print("Galaxy (mass \(mass)) collides with galaxy (mass: \(galaxy.mass))")
         
         galaxy.solarSystems.forEach { $0.galaxy = self }
+        galaxy.blackHoles.forEach { $0.galaxy = self}
         solarSystems.append(contentsOf: galaxy.solarSystems)
+        blackHoles.append(contentsOf: galaxy.blackHoles)
         galaxy.solarSystems = []
+        galaxy.blackHoles = []
 
         solarSystems.removeSubrange(0..<solarSystems.count / 10)
     }

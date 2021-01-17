@@ -12,9 +12,13 @@ class DoubleColumnCollectionView: UICollectionView {
     // MARK: - Lifecycle
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: .zero, collectionViewLayout: DoubleColumnFlowLayout())
+        super.init(frame: .zero, collectionViewLayout: layout)
         
         setupCollectionView()
+    }
+    
+    convenience init() {
+        self.init(frame: .zero, collectionViewLayout: DoubleColumnFlowLayout())
     }
     
     required init?(coder: NSCoder) {

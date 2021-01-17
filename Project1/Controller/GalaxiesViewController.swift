@@ -16,19 +16,7 @@ class GalaxiesViewController: UIViewController {
     
     private var solarSystemsViewController: SolarSystemsViewController?
     
-    lazy private var segmentedControl: UISegmentedControl = {
-        let playImage = UIImage(systemName: "play")!
-        let pauseImage = UIImage(systemName: "pause")!
-        let maxSpeedImage = UIImage(systemName: "forward")!
-        
-        let segmentedControl: UISegmentedControl = UISegmentedControl(items: [pauseImage, playImage, maxSpeedImage])
-        segmentedControl.sizeToFit()
-        segmentedControl.selectedSegmentIndex = timer?.state.rawValue ?? 1
-        
-        segmentedControl.addTarget(self, action: #selector(handleSegmentedControllValueChanged), for: .valueChanged)
-        
-        return segmentedControl
-    }()
+    var timerControl: TimerSegmentedControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +30,6 @@ class GalaxiesViewController: UIViewController {
         
         // Made so we don't update UI of next view controller if it's not on the screen
         solarSystemsViewController = nil
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        segmentedControl.selectedSegmentIndex = timer?.state.rawValue ?? 1
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,7 +47,7 @@ extension GalaxiesViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         
-        self.navigationItem.titleView = segmentedControl
+        self.navigationItem.titleView = timerControl
         
         title = "\(universe?.name ?? "")"
     }
@@ -99,19 +81,6 @@ extension GalaxiesViewController: TimeHandler {
 }
 
 extension GalaxiesViewController {
-    
-    @objc func handleSegmentedControllValueChanged() {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            timer?.suspend()
-        case 1:
-            timer?.resume()
-        case 2:
-            timer?.faster()
-        default:
-            break
-        }
-    }
     
     @objc func handleEditButton() {
         print("Edit cell")
@@ -168,6 +137,7 @@ extension GalaxiesViewController: UICollectionViewDelegate {
         solarSystemsViewController = SolarSystemsViewController()
         
         solarSystemsViewController!.timer = timer
+        solarSystemsViewController!.timerControl = timerControl
         solarSystemsViewController!.galaxy = universe?.galaxies[indexPath.row]
         navigationController?.pushViewController(solarSystemsViewController!, animated: true)
     }
