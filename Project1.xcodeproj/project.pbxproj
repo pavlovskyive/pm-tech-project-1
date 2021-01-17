@@ -10,7 +10,6 @@
 		7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */; };
 		7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */; };
 		7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */; };
-		7904608825B1AB11003EEEC2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904608725B1AB11003EEEC2 /* Extensions.swift */; };
 		794F298D25B03548007FF79F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298C25B03548007FF79F /* AppDelegate.swift */; };
 		794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298E25B03548007FF79F /* SceneDelegate.swift */; };
 		794F299625B0354B007FF79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794F299525B0354B007FF79F /* Assets.xcassets */; };
@@ -23,7 +22,7 @@
 		79C26E3B25B2DF3100761D31 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3A25B2DF3100761D31 /* Star.swift */; };
 		79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3D25B2DF4800761D31 /* Planet.swift */; };
 		79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4025B2E04B00761D31 /* TimeHandler.swift */; };
-		79C26E4425B2E07900761D31 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* ViewModel.swift */; };
+		79C26E4425B2E07900761D31 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* AppModel.swift */; };
 		79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B225B309850001F60E /* SolarSystemsViewController.swift */; };
 		79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -32,7 +31,6 @@
 		7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesViewController.swift; sourceTree = "<group>"; };
 		7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionViewCell.swift; sourceTree = "<group>"; };
-		7904608725B1AB11003EEEC2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		794F298925B03548007FF79F /* Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794F298C25B03548007FF79F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		794F298E25B03548007FF79F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +45,7 @@
 		79C26E3A25B2DF3100761D31 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		79C26E3D25B2DF4800761D31 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		79C26E4025B2E04B00761D31 /* TimeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHandler.swift; sourceTree = "<group>"; };
-		79C26E4325B2E07900761D31 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		79C26E4325B2E07900761D31 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		79F520B225B309850001F60E /* SolarSystemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsViewController.swift; sourceTree = "<group>"; };
 		79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,12 +61,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7904608625B1AAE2003EEEC2 /* Extensions */ = {
+		7904608625B1AAE2003EEEC2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				7904608725B1AB11003EEEC2 /* Extensions.swift */,
 			);
-			path = Extensions;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		794F298025B03548007FF79F = {
@@ -90,16 +87,14 @@
 		794F298B25B03548007FF79F /* Project1 */ = {
 			isa = PBXGroup;
 			children = (
-				7904608625B1AAE2003EEEC2 /* Extensions */,
+				796A28D025B411C100BD3849 /* Application */,
+				796A28D125B411ED00BD3849 /* Storyboard */,
+				796A28C725B410BC00BD3849 /* Additions */,
 				794F29AA25B056BC007FF79F /* Services */,
+				7904608625B1AAE2003EEEC2 /* Extension */,
 				794F29A525B05688007FF79F /* Model */,
 				794F29B525B05C52007FF79F /* View */,
 				79C26E4725B2E5D900761D31 /* Controller */,
-				794F298C25B03548007FF79F /* AppDelegate.swift */,
-				794F298E25B03548007FF79F /* SceneDelegate.swift */,
-				794F299525B0354B007FF79F /* Assets.xcassets */,
-				794F299725B0354B007FF79F /* LaunchScreen.storyboard */,
-				794F299A25B0354B007FF79F /* Info.plist */,
 			);
 			path = Project1;
 			sourceTree = "<group>";
@@ -107,11 +102,8 @@
 		794F29A525B05688007FF79F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				794F29B225B058D8007FF79F /* Universe.swift */,
-				794F29A625B05698007FF79F /* Galaxy.swift */,
-				79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */,
-				79C26E3A25B2DF3100761D31 /* Star.swift */,
-				79C26E3D25B2DF4800761D31 /* Planet.swift */,
+				796A28CF25B4119E00BD3849 /* Entity */,
+				79C26E4325B2E07900761D31 /* AppModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,7 +114,6 @@
 				794F29AB25B056DB007FF79F /* Storage.swift */,
 				7904607B25B0DDFA003EEEC2 /* RepeatingTimer.swift */,
 				79C26E4025B2E04B00761D31 /* TimeHandler.swift */,
-				79C26E4325B2E07900761D31 /* ViewModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -133,6 +124,44 @@
 				7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		796A28C725B410BC00BD3849 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		796A28CF25B4119E00BD3849 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				794F29B225B058D8007FF79F /* Universe.swift */,
+				794F29A625B05698007FF79F /* Galaxy.swift */,
+				79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */,
+				79C26E3A25B2DF3100761D31 /* Star.swift */,
+				79C26E3D25B2DF4800761D31 /* Planet.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		796A28D025B411C100BD3849 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				794F299A25B0354B007FF79F /* Info.plist */,
+				794F299525B0354B007FF79F /* Assets.xcassets */,
+				794F298C25B03548007FF79F /* AppDelegate.swift */,
+				794F298E25B03548007FF79F /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		796A28D125B411ED00BD3849 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				794F299725B0354B007FF79F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		79C26E4725B2E5D900761D31 /* Controller */ = {
@@ -227,10 +256,9 @@
 				794F298D25B03548007FF79F /* AppDelegate.swift in Sources */,
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,
 				79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */,
-				79C26E4425B2E07900761D31 /* ViewModel.swift in Sources */,
+				79C26E4425B2E07900761D31 /* AppModel.swift in Sources */,
 				79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */,
 				7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */,
-				7904608825B1AB11003EEEC2 /* Extensions.swift in Sources */,
 				794F29AC25B056DB007FF79F /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,7 +400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G66XPV3HVM;
-				INFOPLIST_FILE = Project1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Project1/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -392,7 +420,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G66XPV3HVM;
-				INFOPLIST_FILE = Project1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Project1/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  AppModel.swift
 //  Project1
 //
 //  Created by Vsevolod Pavlovskyi on 16.01.2021.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-class UniversesViewModel {
+class AppModel {
     private(set) var universes = [Universe]()
 }
 
-extension UniversesViewModel {
+extension AppModel {
 
     func createUniverse(name: String, blackHoleThresholdMass: UInt, blackHoleThresholdRadius: UInt) {
         if name.isEmpty {
@@ -37,7 +37,7 @@ extension UniversesViewModel {
     }
 }
 
-extension UniversesViewModel: TimeHandler {
+extension AppModel: TimeHandler {
     func handleTick() {
         universes.indices.forEach {
             universes[$0].handleTick()

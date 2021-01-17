@@ -9,7 +9,7 @@ import UIKit
 
 class UniversesViewController: UIViewController {
     
-    private let viewModel = UniversesViewModel()
+    private let appModel = AppModel()
     
     lazy private var timer: RepeatingTimer = {
         RepeatingTimer(timeInterval: 1)
@@ -18,10 +18,6 @@ class UniversesViewController: UIViewController {
     lazy private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
-//        layout.itemSize = CGSize(
-//            width: (view.frame.width / 2) - 20,
-//            height: 140)
-//
         layout.scrollDirection = .vertical
         
         layout.sectionInset = UIEdgeInsets(
@@ -125,7 +121,7 @@ extension UniversesViewController {
 extension UniversesViewController {
     
     @objc func handleTick() {
-        viewModel.handleTick()
+        appModel.handleTick()
         galaxiesViewController?.handleTick()
         
         DispatchQueue.main.async {
@@ -162,7 +158,7 @@ extension UniversesViewController {
 //                name: text,
 //                blackHoleThresholdMass: 50,
 //                blackHoleThresholdRadius: 50)
-            self.viewModel.createUniverse(name: text)
+            self.appModel.createUniverse(name: text)
             
             self.collectionView.reloadData()
         }
@@ -184,7 +180,7 @@ extension UniversesViewController {
 extension UniversesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.universes.count
+        appModel.universes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -198,8 +194,8 @@ extension UniversesViewController: UICollectionViewDataSource {
             action: #selector(handleEditButton),
             for: .touchUpInside)
         
-        cell.titleLabel.text = viewModel.universes[indexPath.row].name
-        cell.secondaryLabel.text = "Age: \(viewModel.universes[indexPath.row].age)"
+        cell.titleLabel.text = appModel.universes[indexPath.row].name
+        cell.secondaryLabel.text = "Age: \(appModel.universes[indexPath.row].age)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
         
         return cell
@@ -212,7 +208,7 @@ extension UniversesViewController: UICollectionViewDelegate {
         galaxiesViewController = GalaxiesViewController()
         
         galaxiesViewController!.timer = timer
-        galaxiesViewController!.universe = viewModel.universes[indexPath.row]
+        galaxiesViewController!.universe = appModel.universes[indexPath.row]
         navigationController?.pushViewController(galaxiesViewController!, animated: true)
     }
 }
