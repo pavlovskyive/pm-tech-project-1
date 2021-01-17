@@ -12,7 +12,7 @@ class SolarSystemDetailedViewController: UIViewController {
     weak var solarSystem: SolarSystem?
     weak var timer: RepeatingTimer?
     
-    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayoutWithHeader())
+    lazy private var collectionView = DoubleColumnCollectionViewWithHeader()
     
     lazy private var segmentedControl: UISegmentedControl = {
         let playImage = UIImage(systemName: "play")!
@@ -58,17 +58,7 @@ extension SolarSystemDetailedViewController {
     
     fileprivate func setupCollectionView() {
         
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
-        collectionView.register(RoundedCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "StarCell")
-        collectionView.alwaysBounceVertical = true
         collectionView.dataSource = self
-        
-        collectionView.contentInset = UIEdgeInsets(
-            top: 15,
-            left: 15,
-            bottom: 15,
-            right: 15)
         
         view.addSubview(collectionView)
         

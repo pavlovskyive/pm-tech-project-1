@@ -10,12 +10,6 @@ import UIKit
 class RoundedCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Variables
-    
-    var imageName: String = "" {
-        didSet {
-            // TODO: implement imageView from imageName
-        }
-    }
 
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -67,9 +61,10 @@ class RoundedCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    let gradientLayer = CAGradientLayer()
+    private let gradientLayer = CAGradientLayer()
     
-    // MARK:- Init
+    // MARK:- Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -81,6 +76,8 @@ class RoundedCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         contentView.frame = bounds
         gradientLayer.frame = bounds
     }
@@ -88,8 +85,9 @@ class RoundedCollectionViewCell: UICollectionViewCell {
 
 extension RoundedCollectionViewCell {
     
-    // MARK: Setup Cell
-    fileprivate func setupCell() {
+    // MARK: - Setup
+    
+    private func setupCell() {
         
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -102,13 +100,12 @@ extension RoundedCollectionViewCell {
         self.addSubview(secondaryLabel)
         self.addSubview(editButton)
         
-        // TODO: CHANGE LATER
         editButton.isHidden = true
         
         setLayoutConstraints()
     }
     
-    func setLayoutConstraints() {
+    private func setLayoutConstraints() {
         NSLayoutConstraint.activate([
             iconImageView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 8),
             iconImageView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 8),
@@ -130,7 +127,7 @@ extension RoundedCollectionViewCell {
         ])
     }
     
-    func setCellShadow() {
+    private func setCellShadow() {
         layer.needsDisplayOnBoundsChange = true
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -141,7 +138,7 @@ extension RoundedCollectionViewCell {
         clipsToBounds = false
     }
     
-    func setGradientBackgroundColor(colorOne: UIColor, colorTwo: UIColor) {
+    private func setGradientBackgroundColor(colorOne: UIColor, colorTwo: UIColor) {
         gradientLayer.frame = bounds
         gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]
         gradientLayer.locations = [0.0, 1.0]
@@ -152,7 +149,7 @@ extension RoundedCollectionViewCell {
         contentView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func roundCorner() {
+    private func roundCorner() {
         contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 1

@@ -12,7 +12,7 @@ class SolarSystemsViewController: UIViewController {
     weak var galaxy: Galaxy?
     weak var timer: RepeatingTimer?
     
-    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayout())
+    lazy private var collectionView = DoubleColumnCollectionView()
     
     private var solarSystemDetailedViewController: SolarSystemDetailedViewController?
     
@@ -72,12 +72,8 @@ extension SolarSystemsViewController {
     
     fileprivate func setupCollectionView() {
         
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
-        collectionView.alwaysBounceVertical = true
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         view.addSubview(collectionView)
         

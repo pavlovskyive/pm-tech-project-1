@@ -15,21 +15,7 @@ class UniversesViewController: UIViewController {
         RepeatingTimer(timeInterval: 1)
     }()
     
-//    lazy private var collectionView: UICollectionView = {
-//        let layout = CollectionViewFlowLayout()
-//
-//        layout.scrollDirection = .vertical
-//
-//        layout.sectionInset = UIEdgeInsets(
-//            top: 15,
-//            left: 15,
-//            bottom: 15,
-//            right: 15)
-//
-//        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-//    }()
-    
-    lazy private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewFlowLayout())
+    lazy private var collectionView = DoubleColumnCollectionView()
     
     private var galaxiesViewController: GalaxiesViewController?
     
@@ -97,12 +83,9 @@ extension UniversesViewController {
     }
     
     fileprivate func setupCollectionView() {
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
-        collectionView.alwaysBounceVertical = true
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         
         view.addSubview(collectionView)
         
