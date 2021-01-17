@@ -7,14 +7,19 @@
 
 import UIKit
 
+protocol GalaxiesViewControllerDelegate: AnyObject {
+    func galaxiesViewController(
+        _ galaxiesViewController: GalaxiesViewController,
+        didSelectGalaxy selectedGalaxy: Galaxy)
+}
+
 class GalaxiesViewController: UIViewController {
 
-    weak var universe: Universe?
-    weak var timer: RepeatingTimer?
+    var universe: Universe?
+    let timer: RepeatingTimer
+    weak var delegate: GalaxiesViewControllerDelegate?
 
     lazy private var collectionView = DoubleColumnCollectionView()
-
-    private var solarSystemsViewController: SolarSystemsViewController?
 
     var timerControl: TimerSegmentedControl?
 
@@ -23,18 +28,23 @@ class GalaxiesViewController: UIViewController {
 
         setupNavigationBarController()
         setupCollectionView()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        // Made so we don't update UI of next view controller if it's not on the screen
-        solarSystemsViewController = nil
+        setupTimer()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    init(universe: Universe, timer: RepeatingTimer, title: String) {
+        self.universe = universe
+        self.timer = timer
+        super.init(nibName: nil, bundle: nil)
+        self.title = title
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -67,13 +77,17 @@ extension GalaxiesViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+
+    fileprivate func setupTimer() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(handleTick),
+            name: Notification.TimerTick, object: nil)
+    }
 }
 
 extension GalaxiesViewController: TimeHandler {
 
     @objc func handleTick() {
-        self.solarSystemsViewController?.handleTick()
-
         DispatchQueue.main.async {
             if self.view.window != nil {
                 self.collectionView.reloadData()
@@ -141,11 +155,8 @@ extension GalaxiesViewController: UICollectionViewDataSource {
 extension GalaxiesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        solarSystemsViewController = SolarSystemsViewController()
-
-        solarSystemsViewController!.timer = timer
-        solarSystemsViewController!.timerControl = timerControl
-        solarSystemsViewController!.galaxy = universe?.galaxies[indexPath.row]
-        navigationController?.pushViewController(solarSystemsViewController!, animated: true)
+        guard let galaxy = universe?.galaxies[indexPath.row] else { return }
+        delegate?.galaxiesViewController(self, didSelectGalaxy: galaxy)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

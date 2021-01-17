@@ -17,8 +17,6 @@ class RepeatingTimer {
 
     lazy private var timer: DispatchSourceTimer = setTimer()
 
-    var eventHandler: (() -> Void)?
-
     enum State: Int {
         case suspended = 0
         case resumed = 1
@@ -31,16 +29,19 @@ class RepeatingTimer {
         timer.setEventHandler {}
         timer.cancel()
         resume()
-        eventHandler = nil
     }
 
     private func setTimer() -> DispatchSourceTimer {
         let timeSource = DispatchSource.makeTimerSource()
         timeSource.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
         timeSource.setEventHandler(handler: { [weak self] in
-            self?.eventHandler?()
+            self?.notificate()
         })
         return timeSource
+    }
+
+    private func notificate() {
+        NotificationCenter.default.post(name: Notification.TimerTick, object: nil)
     }
 
     func resume() {

@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol SolarSystemsViewControllerDelegate: AnyObject {
+    func solarSystemsViewController(
+        _ solarSystemsViewController: SolarSystemsViewController,
+        didSelectSolarSystem selectedSolarSystem: SolarSystem)
+}
+
 class SolarSystemsViewController: UIViewController {
 
-    weak var galaxy: Galaxy?
-    weak var timer: RepeatingTimer?
+    var galaxy: Galaxy?
+    let timer: RepeatingTimer
+    weak var delegate: SolarSystemsViewControllerDelegate?
 
     lazy private var collectionView = DoubleColumnCollectionView()
 
@@ -35,6 +42,17 @@ class SolarSystemsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    init(galaxy: Galaxy, timer: RepeatingTimer) {
+        self.galaxy = galaxy
+        self.timer = timer
+        super.init(nibName: nil, bundle: nil)
+        self.title = galaxy.name
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -140,11 +158,8 @@ extension SolarSystemsViewController: UICollectionViewDataSource {
 extension SolarSystemsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        solarSystemDetailedViewController = SolarSystemDetailedViewController()
-
-        solarSystemDetailedViewController!.timer = timer
-        solarSystemDetailedViewController!.timerControl = timerControl
-        solarSystemDetailedViewController!.solarSystem = galaxy?.solarSystems[indexPath.row]
-        navigationController?.pushViewController(solarSystemDetailedViewController!, animated: true)
+        guard let solarSystem = galaxy?.solarSystems[indexPath.row] else { return }
+        delegate?.solarSystemsViewController(self, didSelectSolarSystem: solarSystem)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
