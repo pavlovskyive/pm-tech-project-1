@@ -15,12 +15,20 @@ enum StarStage: String {
     case blackHole = "Black Hole"
 }
 
+enum StarType: String, CaseIterable {
+    case solar = "Solar"
+    case hotBlue = "Hot Blue"
+    case red = "Red"
+    case white = "White"
+}
+
 class Star {
     
     // MARK: - Variables
     
     // Link to parent Solar System
     weak var solarSystem: SolarSystem?
+    weak var galaxy: Galaxy? = nil
     
     // Star name.
     private(set) var name: String
@@ -29,7 +37,7 @@ class Star {
     private(set) var age: UInt = 0
     
     // Star type.
-//    private(set) var type: StarType
+    private(set) var type = StarType.allCases.randomElement()!
     
     // Current Star stage.
     private(set) var stage: StarStage = .babyStar
@@ -92,7 +100,11 @@ extension Star {
     
     // Handle Star becoming Black Hole.
     private func handleBecomingBlackHole() {
-//        print("Star became black hole!")
+        print("Star became a Black Hole!")
+        
+        guard let galaxy = solarSystem?.galaxy else { return }
+        galaxy.handleBecomingBlackHole(of: self, in: solarSystem!)
+        solarSystem = nil
     }
 }
 
@@ -101,6 +113,11 @@ extension Star: TimeHandler {
     // MARK: - Chain of Responsibility
     
     func handleTick() {
+        
+        // It is not neccessary to change Star age or stage after it's on final stage.
+        if stage == .dwarf || stage == .blackHole {
+            return
+        }
         
         // Increase age of current Star.
         increaseAge()

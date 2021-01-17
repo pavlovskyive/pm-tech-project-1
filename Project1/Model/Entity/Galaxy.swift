@@ -33,6 +33,9 @@ final class Galaxy {
     // Solar systems inside current Galaxy.
     private(set) var solarSystems = [SolarSystem]()
     
+    // Black holes inside current Galaxy.
+    private(set) var blackHoles = [Star]()
+    
     // MARK: - Lifecycle
     
     init(name: String) {
@@ -81,6 +84,16 @@ extension Galaxy {
         galaxy.solarSystems = []
 
         solarSystems.removeSubrange(0..<solarSystems.count / 10)
+    }
+    
+    // Handle Star becoming Black Hole.
+    public func handleBecomingBlackHole(of star: Star, in solarSystem: SolarSystem) {
+        blackHoles.append(star)
+        
+        guard let index = solarSystems
+                .firstIndex(where: { $0 === star.solarSystem }) else { return }
+        
+        solarSystems.remove(at: index)
     }
 }
 
