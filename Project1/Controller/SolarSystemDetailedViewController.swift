@@ -11,11 +11,11 @@ class SolarSystemDetailedViewController: UIViewController {
 
     weak var solarSystem: SolarSystem?
     weak var timer: RepeatingTimer?
-    
+
     lazy private var collectionView = DoubleColumnCollectionViewWithHeader()
-    
+
     var timerControl: TimerSegmentedControl?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,25 +25,25 @@ class SolarSystemDetailedViewController: UIViewController {
 }
 
 extension SolarSystemDetailedViewController {
-    
+
     fileprivate func setupNavigationBarController() {
         navigationController?.navigationBar.shadowImage = UIImage()
-        
+
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
-        
+
         self.navigationItem.titleView = timerControl
-        
+
         title = "\(solarSystem?.name ?? "")"
     }
-    
+
     fileprivate func setupCollectionView() {
-        
+
         collectionView.dataSource = self
-        
+
         view.addSubview(collectionView)
-        
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -55,7 +55,7 @@ extension SolarSystemDetailedViewController {
 }
 
 extension SolarSystemDetailedViewController: TimeHandler {
-    
+
     @objc func handleTick() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -64,7 +64,7 @@ extension SolarSystemDetailedViewController: TimeHandler {
 }
 
 extension SolarSystemDetailedViewController {
-    
+
     @objc func handleEditButton() {
         print("Edit cell")
     }
@@ -75,43 +75,56 @@ extension SolarSystemDetailedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         solarSystem?.planets.count ?? 0
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "StarCell", for: indexPath) as! RoundedCollectionViewCell
-        
+
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        guard let cell = collectionView
+                .dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: "StarCell",
+                    for: indexPath) as? RoundedCollectionViewCell
+        else {
+            fatalError("Could not cast cell as RoundedCollectionViewCell")
+        }
+
         let star = solarSystem?.star
-        
+
         let name = star?.name ?? ""
         let age = star?.age ?? 0
         let mass = star?.mass ?? 0
-        
+
         cell.titleLabel.text = "\(name)"
         cell.secondaryLabel.text = "Age: \(age)\nMass: \(mass)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
-        
+
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "RoundedCell",
-            for: indexPath) as! RoundedCollectionViewCell
-        
+                for: indexPath) as? RoundedCollectionViewCell
+        else {
+            fatalError("Could not cast cell as RoundedCollectionViewCell")
+        }
+
         cell.editButton.addTarget(
             self,
             action: #selector(handleEditButton),
             for: .touchUpInside)
-        
+
         let planet = solarSystem?.planets[indexPath.row]
-        
+
         let name = planet?.name
 //        let type = solarSystem?.type.rawValue ?? "Spiral"
         let mass = planet?.mass ?? 0
-        
+
 //        var image: UIImage
-        
+
 //        switch planet?.type {
 //        case .spiral:
 //            image = UIImage(systemName: "hurricane")!
@@ -120,13 +133,12 @@ extension SolarSystemDetailedViewController: UICollectionViewDataSource {
 //        default:
 //            image = UIImage(systemName: "aqi.low")!
 //        }
-        
+
         cell.titleLabel.text = name
         cell.secondaryLabel.text = "Mass: \(mass)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
 //        cell.iconImageView.image = image
-        
+
         return cell
     }
 }
-

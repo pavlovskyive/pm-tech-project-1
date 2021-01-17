@@ -10,11 +10,11 @@ import Foundation
 class RepeatingTimer {
 
     var timeInterval: TimeInterval
-    
+
     init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
-    
+
     lazy private var timer: DispatchSourceTimer = setTimer()
 
     var eventHandler: (() -> Void)?
@@ -33,18 +33,18 @@ class RepeatingTimer {
         resume()
         eventHandler = nil
     }
-    
+
     private func setTimer() -> DispatchSourceTimer {
-        let t = DispatchSource.makeTimerSource()
-        t.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
-        t.setEventHandler(handler: { [weak self] in
+        let timeSource = DispatchSource.makeTimerSource()
+        timeSource.schedule(deadline: .now() + self.timeInterval, repeating: self.timeInterval)
+        timeSource.setEventHandler(handler: { [weak self] in
             self?.eventHandler?()
         })
-        return t
+        return timeSource
     }
 
     func resume() {
-        
+
         switch state {
         case .faster:
             timer.cancel()
@@ -66,9 +66,9 @@ class RepeatingTimer {
         state = .suspended
         timer.cancel()
     }
-    
+
     func faster() {
-        
+
         switch state {
         case .resumed:
             timer.cancel()

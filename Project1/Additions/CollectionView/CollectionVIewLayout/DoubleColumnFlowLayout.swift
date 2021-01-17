@@ -8,7 +8,7 @@
 import UIKit
 
 class DoubleColumnFlowLayout: UICollectionViewFlowLayout {
-    
+
     override func prepare() {
         super.prepare()
 
@@ -21,7 +21,7 @@ class DoubleColumnFlowLayout: UICollectionViewFlowLayout {
 final class DoubleColumnFlowLayoutWithHeader: DoubleColumnFlowLayout {
     override func prepare() {
         super.prepare()
-        
+
         headerReferenceSize = CGSize(width: collectionView!.bounds.width - 20, height: 120)
     }
 }

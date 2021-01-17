@@ -10,23 +10,23 @@ import UIKit
 class DoubleColumnCollectionView: UICollectionView {
 
     // MARK: - Lifecycle
-    
+
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: .zero, collectionViewLayout: layout)
-        
+
         setupCollectionView()
     }
-    
+
     convenience init() {
         self.init(frame: .zero, collectionViewLayout: DoubleColumnFlowLayout())
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Setup
-    
+
     fileprivate func setupCollectionView() {
         backgroundColor = .systemBackground
         register(RoundedCollectionViewCell.self, forCellWithReuseIdentifier: "RoundedCell")
@@ -38,22 +38,24 @@ class DoubleColumnCollectionView: UICollectionView {
 final class DoubleColumnCollectionViewWithHeader: DoubleColumnCollectionView {
 
     // MARK: - Lifecycle
-    
+
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: .zero, collectionViewLayout: DoubleColumnFlowLayoutWithHeader())
-        
+
         setupCollectionView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Setup
-    
+
     override func setupCollectionView() {
         super.setupCollectionView()
-        
-        register(RoundedCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "StarCell")
+
+        register(RoundedCollectionViewCell.self,
+                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                 withReuseIdentifier: "StarCell")
     }
 }

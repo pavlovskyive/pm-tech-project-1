@@ -8,17 +8,17 @@
 import Foundation
 
 final class AppModel {
-    
+
     // MARK: - Variables
-    
+
     // Storage.
     private(set) var universes = [Universe]()
 }
 
 extension AppModel {
-    
+
     // MARK: - Methods
-    
+
     // Create Universe with given threshold parameters for Star to became a Black Hole.
     func createUniverse(name: String, blackHoleThresholdMass: UInt, blackHoleThresholdRadius: UInt) {
         if name.isEmpty {
@@ -35,7 +35,7 @@ extension AppModel {
                     blackHoleThresholdRadius: blackHoleThresholdRadius))
         }
     }
-    
+
     // Conveniense Universe creation with default threshold parameters for Star to became a Black Hole.
     func createUniverse(name: String) {
         createUniverse(
@@ -46,20 +46,20 @@ extension AppModel {
 }
 
 extension AppModel: TimeHandler {
-    
+
     // MARK: - Chain of Responsibility.
-    
+
     func handleTick() {
-        
+
         // Call updates on every Universe asynchronously.
         let queue = OperationQueue()
-        
+
         for universe in universes {
             queue.addOperation {
                 universe.handleTick()
             }
         }
-        
+
         queue.waitUntilAllOperationsAreFinished()
     }
 }
