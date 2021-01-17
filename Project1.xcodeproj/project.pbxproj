@@ -20,11 +20,23 @@
 		796A0F2325B4144A00DA3F9F /* DoubleColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */; };
 		796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */; };
 		79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */; };
+		79B87CD725B484CB003EC34C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CD625B484CB003EC34C /* Coordinator.swift */; };
+		79B87CDB25B484E6003EC34C /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CDA25B484E6003EC34C /* ApplicationCoordinator.swift */; };
+		79B87CDF25B4868F003EC34C /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CDE25B4868F003EC34C /* StateMachine.swift */; };
+		79B87CE325B48716003EC34C /* UniversesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CE225B48716003EC34C /* UniversesState.swift */; };
+		79B87CE925B48828003EC34C /* UniversesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CE825B48828003EC34C /* UniversesCoordinator.swift */; };
+		79B87CEC25B48DF1003EC34C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CEB25B48DF1003EC34C /* Notification.swift */; };
+		79B87CF025B49C07003EC34C /* GalaxiesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CEF25B49C07003EC34C /* GalaxiesCoordinator.swift */; };
+		79B87CF325B49EB3003EC34C /* GalaxiesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CF225B49EB3003EC34C /* GalaxiesState.swift */; };
+		79B87CF625B4AFAC003EC34C /* SolarSystemsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CF525B4AFAC003EC34C /* SolarSystemsCoordinator.swift */; };
+		79B87CF925B4B44D003EC34C /* SolarSystemsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */; };
+		79B87CFF25B4BA82003EC34C /* SolarSystemDetailedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */; };
+		79B87D0225B4BAB5003EC34C /* SolarSystemDetailedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87D0125B4BAB5003EC34C /* SolarSystemDetailedCoordinator.swift */; };
 		79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */; };
 		79C26E3B25B2DF3100761D31 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3A25B2DF3100761D31 /* Star.swift */; };
 		79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3D25B2DF4800761D31 /* Planet.swift */; };
 		79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4025B2E04B00761D31 /* TimeHandler.swift */; };
-		79C26E4425B2E07900761D31 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* AppModel.swift */; };
+		79C26E4425B2E07900761D31 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* Storage.swift */; };
 		79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B225B309850001F60E /* SolarSystemsViewController.swift */; };
 		79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -45,11 +57,23 @@
 		796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnFlowLayout.swift; sourceTree = "<group>"; };
 		796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnCollectionView.swift; sourceTree = "<group>"; };
 		79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystem.swift; sourceTree = "<group>"; };
+		79B87CD625B484CB003EC34C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		79B87CDA25B484E6003EC34C /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		79B87CDE25B4868F003EC34C /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		79B87CE225B48716003EC34C /* UniversesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesState.swift; sourceTree = "<group>"; };
+		79B87CE825B48828003EC34C /* UniversesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesCoordinator.swift; sourceTree = "<group>"; };
+		79B87CEB25B48DF1003EC34C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		79B87CEF25B49C07003EC34C /* GalaxiesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesCoordinator.swift; sourceTree = "<group>"; };
+		79B87CF225B49EB3003EC34C /* GalaxiesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesState.swift; sourceTree = "<group>"; };
+		79B87CF525B4AFAC003EC34C /* SolarSystemsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsCoordinator.swift; sourceTree = "<group>"; };
+		79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsState.swift; sourceTree = "<group>"; };
+		79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedState.swift; sourceTree = "<group>"; };
+		79B87D0125B4BAB5003EC34C /* SolarSystemDetailedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedCoordinator.swift; sourceTree = "<group>"; };
 		79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesViewController.swift; sourceTree = "<group>"; };
 		79C26E3A25B2DF3100761D31 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		79C26E3D25B2DF4800761D31 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		79C26E4025B2E04B00761D31 /* TimeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHandler.swift; sourceTree = "<group>"; };
-		79C26E4325B2E07900761D31 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		79C26E4325B2E07900761D31 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		79F520B225B309850001F60E /* SolarSystemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsViewController.swift; sourceTree = "<group>"; };
 		79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,13 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7904608625B1AAE2003EEEC2 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		794F298025B03548007FF79F = {
 			isa = PBXGroup;
 			children = (
@@ -91,14 +108,15 @@
 		794F298B25B03548007FF79F /* Project1 */ = {
 			isa = PBXGroup;
 			children = (
+				79B87CD525B484BA003EC34C /* Coordinators */,
 				796A28D025B411C100BD3849 /* Application */,
 				796A28D125B411ED00BD3849 /* Storyboard */,
 				796A28C725B410BC00BD3849 /* Additions */,
 				794F29AA25B056BC007FF79F /* Services */,
-				7904608625B1AAE2003EEEC2 /* Extension */,
 				794F29A525B05688007FF79F /* Model */,
 				794F29B525B05C52007FF79F /* View */,
 				79C26E4725B2E5D900761D31 /* Controller */,
+				79B87CDD25B4867A003EC34C /* StateMachine */,
 			);
 			path = Project1;
 			sourceTree = "<group>";
@@ -107,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				796A28CF25B4119E00BD3849 /* Entity */,
-				79C26E4325B2E07900761D31 /* AppModel.swift */,
+				79C26E4325B2E07900761D31 /* Storage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +192,7 @@
 				794F299525B0354B007FF79F /* Assets.xcassets */,
 				794F298C25B03548007FF79F /* AppDelegate.swift */,
 				794F298E25B03548007FF79F /* SceneDelegate.swift */,
+				79B87CEB25B48DF1003EC34C /* Notification.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -184,6 +203,39 @@
 				794F299725B0354B007FF79F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		79B87CD525B484BA003EC34C /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				79B87CD625B484CB003EC34C /* Coordinator.swift */,
+				79B87CDA25B484E6003EC34C /* ApplicationCoordinator.swift */,
+				79B87CE825B48828003EC34C /* UniversesCoordinator.swift */,
+				79B87CEF25B49C07003EC34C /* GalaxiesCoordinator.swift */,
+				79B87CF525B4AFAC003EC34C /* SolarSystemsCoordinator.swift */,
+				79B87D0125B4BAB5003EC34C /* SolarSystemDetailedCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		79B87CDD25B4867A003EC34C /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				79B87CE525B4871F003EC34C /* States */,
+				79B87CDE25B4868F003EC34C /* StateMachine.swift */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
+		79B87CE525B4871F003EC34C /* States */ = {
+			isa = PBXGroup;
+			children = (
+				79B87CE225B48716003EC34C /* UniversesState.swift */,
+				79B87CF225B49EB3003EC34C /* GalaxiesState.swift */,
+				79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */,
+				79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */,
+			);
+			path = States;
 			sourceTree = "<group>";
 		};
 		79C26E4725B2E5D900761D31 /* Controller */ = {
@@ -288,23 +340,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B87CF925B4B44D003EC34C /* SolarSystemsState.swift in Sources */,
+				79B87CEC25B48DF1003EC34C /* Notification.swift in Sources */,
 				79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */,
 				794F29B325B058D8007FF79F /* Universe.swift in Sources */,
+				79B87CE325B48716003EC34C /* UniversesState.swift in Sources */,
+				79B87D0225B4BAB5003EC34C /* SolarSystemDetailedCoordinator.swift in Sources */,
+				79B87CF025B49C07003EC34C /* GalaxiesCoordinator.swift in Sources */,
 				7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */,
 				79C26E3B25B2DF3100761D31 /* Star.swift in Sources */,
 				7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */,
 				79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */,
+				79B87CFF25B4BA82003EC34C /* SolarSystemDetailedState.swift in Sources */,
+				79B87CD725B484CB003EC34C /* Coordinator.swift in Sources */,
 				79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */,
+				79B87CF625B4AFAC003EC34C /* SolarSystemsCoordinator.swift in Sources */,
 				79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */,
 				794F29A725B05698007FF79F /* Galaxy.swift in Sources */,
 				794F298D25B03548007FF79F /* AppDelegate.swift in Sources */,
 				796A0F2325B4144A00DA3F9F /* DoubleColumnFlowLayout.swift in Sources */,
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,
+				79B87CE925B48828003EC34C /* UniversesCoordinator.swift in Sources */,
 				79C26E4125B2E04B00761D31 /* TimeHandler.swift in Sources */,
 				796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */,
+				79B87CF325B49EB3003EC34C /* GalaxiesState.swift in Sources */,
+				79B87CDB25B484E6003EC34C /* ApplicationCoordinator.swift in Sources */,
 				79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */,
-				79C26E4425B2E07900761D31 /* AppModel.swift in Sources */,
+				79C26E4425B2E07900761D31 /* Storage.swift in Sources */,
 				79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */,
+				79B87CDF25B4868F003EC34C /* StateMachine.swift in Sources */,
 				7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

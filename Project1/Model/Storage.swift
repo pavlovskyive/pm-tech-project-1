@@ -7,15 +7,21 @@
 
 import Foundation
 
-final class AppModel {
+final class Storage {
 
     // MARK: - Variables
 
     // Storage.
     private(set) var universes = [Universe]()
+
+    init() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(handleTick),
+            name: Notification.TimerTick, object: nil)
+    }
 }
 
-extension AppModel {
+extension Storage {
 
     // MARK: - Methods
 
@@ -45,11 +51,11 @@ extension AppModel {
     }
 }
 
-extension AppModel: TimeHandler {
+extension Storage: TimeHandler {
 
     // MARK: - Chain of Responsibility.
 
-    func handleTick() {
+    @objc func handleTick() {
 
         // Call updates on every Universe asynchronously.
         let queue = OperationQueue()

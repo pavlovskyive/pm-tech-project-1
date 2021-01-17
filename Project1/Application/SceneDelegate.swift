@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var applicationCoordinator: ApplicationCoordinator?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -17,16 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
+        let applicationCoordinator = ApplicationCoordinator(window: window)
 
-        let viewController = UniversesViewController()
-        viewController.title = "Universes"
-
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-
-        window.rootViewController = navigationController
         self.window = window
-        window.makeKeyAndVisible()
+        self.applicationCoordinator = applicationCoordinator
+
+        applicationCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

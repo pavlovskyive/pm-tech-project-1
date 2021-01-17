@@ -9,8 +9,8 @@ import UIKit
 
 class SolarSystemDetailedViewController: UIViewController {
 
-    weak var solarSystem: SolarSystem?
-    weak var timer: RepeatingTimer?
+    var solarSystem: SolarSystem?
+    let timer: RepeatingTimer
 
     lazy private var collectionView = DoubleColumnCollectionViewWithHeader()
 
@@ -21,6 +21,17 @@ class SolarSystemDetailedViewController: UIViewController {
 
         setupNavigationBarController()
         setupCollectionView()
+    }
+
+    init(solarSystem: SolarSystem, timer: RepeatingTimer) {
+        self.solarSystem = solarSystem
+        self.timer = timer
+        super.init(nibName: nil, bundle: nil)
+        self.title = solarSystem.name
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
