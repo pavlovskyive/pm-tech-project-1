@@ -75,7 +75,9 @@ extension GalaxiesViewController: TimeHandler {
         self.solarSystemsViewController?.handleTick()
 
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            if self.view.window != nil {
+                self.collectionView.reloadData()
+            }
         }
     }
 }

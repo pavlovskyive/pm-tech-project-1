@@ -75,7 +75,9 @@ extension SolarSystemsViewController: TimeHandler {
         solarSystemDetailedViewController?.handleTick()
 
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
+            if self.view.window != nil {
+                self.collectionView.reloadData()
+            }
         }
     }
 }
