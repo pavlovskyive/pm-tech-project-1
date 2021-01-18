@@ -71,7 +71,7 @@ extension Universe {
     }
 }
 
-extension Universe: TimeHandler {
+extension Universe: TimerListener {
 
     // MARK: - Chain of Responsibility
 

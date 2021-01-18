@@ -9,8 +9,18 @@ import UIKit
 
 class SolarSystemDetailedViewController: UIViewController {
 
-    var solarSystem: SolarSystem?
-    let timer: RepeatingTimer
+    var solarSystem: SolarSystem? {
+        didSet {
+            title = solarSystem?.name
+        }
+    }
+    var timer: RepeatingTimer? {
+        didSet {
+            timer?.addListener(self)
+        }
+    }
+
+    var stateMachine: NavigationControllerStateMachine?
 
     lazy private var collectionView = DoubleColumnCollectionViewWithHeader()
 
@@ -23,15 +33,10 @@ class SolarSystemDetailedViewController: UIViewController {
         setupCollectionView()
     }
 
-    init(solarSystem: SolarSystem, timer: RepeatingTimer) {
-        self.solarSystem = solarSystem
-        self.timer = timer
-        super.init(nibName: nil, bundle: nil)
-        self.title = solarSystem.name
-    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        collectionView.reloadData()
     }
 }
 
@@ -65,7 +70,7 @@ extension SolarSystemDetailedViewController {
     }
 }
 
-extension SolarSystemDetailedViewController: TimeHandler {
+extension SolarSystemDetailedViewController: TimerListener {
 
     @objc func handleTick() {
         DispatchQueue.main.async {

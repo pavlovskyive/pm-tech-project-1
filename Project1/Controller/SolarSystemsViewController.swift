@@ -7,21 +7,22 @@
 
 import UIKit
 
-protocol SolarSystemsViewControllerDelegate: AnyObject {
-    func solarSystemsViewController(
-        _ solarSystemsViewController: SolarSystemsViewController,
-        didSelectSolarSystem selectedSolarSystem: SolarSystem)
-}
-
 class SolarSystemsViewController: UIViewController {
 
-    var galaxy: Galaxy?
-    let timer: RepeatingTimer
-    weak var delegate: SolarSystemsViewControllerDelegate?
+    var galaxy: Galaxy? {
+        didSet {
+            title = galaxy?.name
+        }
+    }
+    var timer: RepeatingTimer? {
+        didSet {
+            timer?.addListener(self)
+        }
+    }
+
+    var stateMachine: NavigationControllerStateMachine?
 
     lazy private var collectionView = DoubleColumnCollectionView()
-
-    private var solarSystemDetailedViewController: SolarSystemDetailedViewController?
 
     var timerControl: TimerSegmentedControl?
 
@@ -32,27 +33,15 @@ class SolarSystemsViewController: UIViewController {
         setupCollectionView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // Made so we don't update UI of next view controller if it's not on the screen
-        solarSystemDetailedViewController = nil
+        collectionView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
-    }
-
-    init(galaxy: Galaxy, timer: RepeatingTimer) {
-        self.galaxy = galaxy
-        self.timer = timer
-        super.init(nibName: nil, bundle: nil)
-        self.title = galaxy.name
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -85,13 +74,17 @@ extension SolarSystemsViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+
+//    fileprivate func setupTimer() {
+//        NotificationCenter.default.addObserver(
+//            self, selector: #selector(handleTick),
+//            name: Notification.TimerTick, object: nil)
+//    }
 }
 
-extension SolarSystemsViewController: TimeHandler {
+extension SolarSystemsViewController: TimerListener {
 
     @objc func handleTick() {
-        solarSystemDetailedViewController?.handleTick()
-
         DispatchQueue.main.async {
             if self.view.window != nil {
                 self.collectionView.reloadData()
@@ -159,7 +152,9 @@ extension SolarSystemsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let solarSystem = galaxy?.solarSystems[indexPath.row] else { return }
-        delegate?.solarSystemsViewController(self, didSelectSolarSystem: solarSystem)
+        let solarSystemDetailedState = SolarSystemDetailedState()
+        solarSystemDetailedState.solarSystem = solarSystem
+        stateMachine?.enter(solarSystemDetailedState)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

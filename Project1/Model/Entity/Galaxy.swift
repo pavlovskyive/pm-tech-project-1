@@ -100,7 +100,7 @@ extension Galaxy {
     }
 }
 
-extension Galaxy: TimeHandler {
+extension Galaxy: TimerListener {
 
     // MARK: - Chain of Responsibility
 

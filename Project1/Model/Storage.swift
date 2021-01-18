@@ -13,12 +13,6 @@ final class Storage {
 
     // Storage.
     private(set) var universes = [Universe]()
-
-    init() {
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(handleTick),
-            name: Notification.TimerTick, object: nil)
-    }
 }
 
 extension Storage {
@@ -51,7 +45,7 @@ extension Storage {
     }
 }
 
-extension Storage: TimeHandler {
+extension Storage: TimerListener {
 
     // MARK: - Chain of Responsibility.
 
