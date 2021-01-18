@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol TimeHandler {
+@objc protocol TimerListener {
     func handleTick()
 }

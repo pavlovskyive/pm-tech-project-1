@@ -65,7 +65,7 @@ extension SolarSystem {
     }
 }
 
-extension SolarSystem: TimeHandler {
+extension SolarSystem: TimerListener {
 
     // MARK: - Chain of Responsibility
 

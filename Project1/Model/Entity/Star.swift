@@ -108,7 +108,7 @@ extension Star {
     }
 }
 
-extension Star: TimeHandler {
+extension Star: TimerListener {
 
     // MARK: - Chain of Responsibility
 

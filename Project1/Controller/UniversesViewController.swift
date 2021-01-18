@@ -7,22 +7,17 @@
 
 import UIKit
 
-protocol UniversesViewControllerDelegate: class {
-    func universesViewController(_ universesViewController: UniversesViewController,
-                                 didSelectUniverse selectedUniverse: Universe)
-}
-
 class UniversesViewController: UIViewController {
 
-    var storage: Storage
-    let timer: RepeatingTimer
-    weak var delegate: UniversesViewControllerDelegate?
-
-    lazy private var collectionView = DoubleColumnCollectionView() {
+    var storage: Storage?
+    var timer: RepeatingTimer? {
         didSet {
-            collectionView.delegate = self
+            timer?.addListener(self)
         }
     }
+    var stateMachine: NavigationControllerStateMachine?
+
+    lazy private var collectionView = DoubleColumnCollectionView()
 
     private var timerControl = TimerSegmentedControl()
 
@@ -30,26 +25,16 @@ class UniversesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
+        title = "Universes"
+
         setupNavigationBarController()
         setupCollectionView()
-        setupTimer()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
         print("Received memory warning")
-    }
-
-    init(storage: Storage, timer: RepeatingTimer) {
-        self.storage = storage
-        self.timer = timer
-        super.init(nibName: nil, bundle: nil)
-        self.title = "Universes"
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -89,30 +74,26 @@ extension UniversesViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
-    fileprivate func setupTimer() {
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(handleTick),
-            name: Notification.TimerTick, object: nil)
-    }
 }
 
-extension UniversesViewController {
-
+extension UniversesViewController: TimerListener {
     @objc func handleTick() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
+}
+
+extension UniversesViewController {
 
     @objc func handleSegmentedControllValueChanged() {
         switch timerControl.selectedSegmentIndex {
         case 0:
-            timer.suspend()
+            timer?.suspend()
         case 1:
-            timer.resume()
+            timer?.resume()
         case 2:
-            timer.faster()
+            timer?.faster()
         default:
             break
         }
@@ -134,7 +115,7 @@ extension UniversesViewController {
 //                name: text,
 //                blackHoleThresholdMass: 50,
 //                blackHoleThresholdRadius: 50)
-            self.storage.createUniverse(name: text)
+            self.storage?.createUniverse(name: text)
 
             self.collectionView.reloadData()
         }
@@ -156,7 +137,7 @@ extension UniversesViewController {
 extension UniversesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        storage.universes.count
+        storage?.universes.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -174,8 +155,12 @@ extension UniversesViewController: UICollectionViewDataSource {
             action: #selector(handleEditButton),
             for: .touchUpInside)
 
-        cell.titleLabel.text = storage.universes[indexPath.row].name
-        cell.secondaryLabel.text = "Age: \(storage.universes[indexPath.row].age)"
+        guard let universe = storage?.universes[indexPath.row] else {
+            return cell
+        }
+
+        cell.titleLabel.text = universe.name
+        cell.secondaryLabel.text = "Age: \(universe.age)"
         cell.iconImageView.image = UIImage(systemName: "camera.filters")
 
         return cell
@@ -186,8 +171,9 @@ extension UniversesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        let universe = storage.universes[indexPath.row]
-        delegate?.universesViewController(self, didSelectUniverse: universe)
+        let galaxiesStage = GalaxiesState()
+        galaxiesStage.universe = storage?.universes[indexPath.row]
+        stateMachine?.enter(galaxiesStage)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

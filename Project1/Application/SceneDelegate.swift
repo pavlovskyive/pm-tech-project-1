@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var applicationCoordinator: ApplicationCoordinator?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -18,12 +17,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let applicationCoordinator = ApplicationCoordinator(window: window)
+
+        let timer = RepeatingTimer(timeInterval: 1)
+        timer.resume()
+        let storage = Storage()
+
+        let viewController = UniversesViewController()
+
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+
+        let viewControllerStateMachine = NavigationControllerStateMachine(
+            presenter: navigationController,
+            storage: storage,
+            timer: timer)
+
+        viewController.storage = storage
+        viewController.timer = timer
+        viewController.stateMachine = viewControllerStateMachine
+
+        timer.addListener(storage)
+
+        viewControllerStateMachine.enter(UniversesState())
+
+        window.rootViewController = navigationController
 
         self.window = window
-        self.applicationCoordinator = applicationCoordinator
-
-        applicationCoordinator.start()
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
