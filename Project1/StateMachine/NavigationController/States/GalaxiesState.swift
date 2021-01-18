@@ -5,7 +5,7 @@
 //  Created by Vsevolod Pavlovskyi on 17.01.2021.
 //
 
-import Foundation
+import UIKit
 
 class GalaxiesState: State {
 
@@ -22,7 +22,12 @@ class GalaxiesState: State {
         galaxiesViewController.timer = stateMachine.timer
         galaxiesViewController.stateMachine = stateMachine
 
-        stateMachine.presenter.pushViewController(galaxiesViewController, animated: true)
+        switch previousState {
+        case is UniversesState?:
+            stateMachine.presenter.pushViewController(galaxiesViewController, animated: true)
+        default:
+            stateMachine.presenter.reveal(galaxiesViewController)
+        }
     }
 
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

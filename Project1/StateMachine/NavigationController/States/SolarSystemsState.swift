@@ -5,7 +5,7 @@
 //  Created by Vsevolod Pavlovskyi on 17.01.2021.
 //
 
-import Foundation
+import UIKit
 
 class SolarSystemsState: State {
 
@@ -21,7 +21,12 @@ class SolarSystemsState: State {
         solarSystemsViewController.timer = stateMachine.timer
         solarSystemsViewController.stateMachine = stateMachine
 
-        stateMachine.presenter.pushViewController(solarSystemsViewController, animated: true)
+        switch previousState {
+        case is GalaxiesState?:
+            stateMachine.presenter.pushViewController(solarSystemsViewController, animated: true)
+        default:
+            stateMachine.presenter.reveal(solarSystemsViewController)
+        }
     }
 
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

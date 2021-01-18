@@ -55,6 +55,9 @@ extension GalaxiesViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
 
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
+
         self.navigationItem.titleView = timerControl
 
         title = "\(universe?.name ?? "")"
@@ -93,6 +96,10 @@ extension GalaxiesViewController {
 
     @objc func handleEditButton() {
         print("Edit cell")
+    }
+
+    @objc func handleBackButton() {
+        stateMachine?.enter(UniversesState())
     }
 }
 

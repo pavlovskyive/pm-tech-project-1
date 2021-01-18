@@ -54,6 +54,9 @@ extension SolarSystemsViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
 
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
+
         self.navigationItem.titleView = timerControl
 
         title = "\(galaxy?.name ?? "")"
@@ -97,6 +100,16 @@ extension SolarSystemsViewController {
 
     @objc func handleEditButton() {
         print("Edit cell")
+    }
+
+    @objc func handleBackButton() {
+        guard let galaxy = galaxy else {
+            return
+        }
+
+        let galaxiesState = GalaxiesState()
+        galaxiesState.universe = galaxy.universe
+        stateMachine?.enter(galaxiesState)
     }
 }
 

@@ -11,6 +11,7 @@
 		7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */; };
 		7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */; };
 		79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */; };
+		7915BDDD25B6095700F3CCA8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7915BDDC25B6095700F3CCA8 /* Extension.swift */; };
 		794F298D25B03548007FF79F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298C25B03548007FF79F /* AppDelegate.swift */; };
 		794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298E25B03548007FF79F /* SceneDelegate.swift */; };
 		794F299625B0354B007FF79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794F299525B0354B007FF79F /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesViewController.swift; sourceTree = "<group>"; };
 		7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionViewCell.swift; sourceTree = "<group>"; };
 		79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSegmentedControl.swift; sourceTree = "<group>"; };
+		7915BDDC25B6095700F3CCA8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		794F298925B03548007FF79F /* Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794F298C25B03548007FF79F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		794F298E25B03548007FF79F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				796A0F2525B41A9600DA3F9F /* CollectionView */,
 				79DB5E0525B5850F007CBC7E /* WeakEventListener.swift */,
+				7915BDDC25B6095700F3CCA8 /* Extension.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,
 				79C26E4125B2E04B00761D31 /* TimerListener.swift in Sources */,
 				796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */,
+				7915BDDD25B6095700F3CCA8 /* Extension.swift in Sources */,
 				79B87CF325B49EB3003EC34C /* GalaxiesState.swift in Sources */,
 				79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */,
 				79C26E4425B2E07900761D31 /* Storage.swift in Sources */,
