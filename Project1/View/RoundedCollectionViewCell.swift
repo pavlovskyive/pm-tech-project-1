@@ -91,9 +91,8 @@ extension RoundedCollectionViewCell {
 
         translatesAutoresizingMaskIntoConstraints = false
 
+        setBlurBackground()
         roundCorner()
-        setGradientBackgroundColor(colorOne: .systemPurple, colorTwo: .systemIndigo)
-        setCellShadow()
 
         self.addSubview(iconImageView)
         self.addSubview(titleLabel)
@@ -138,10 +137,35 @@ extension RoundedCollectionViewCell {
         clipsToBounds = false
     }
 
+    private func setBlurBackground() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
+            backgroundColor = .clear
+
+            let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+
+            contentView.addSubview(blurEffectView)
+
+            blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                blurEffectView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                blurEffectView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                blurEffectView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 10),
+                blurEffectView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 10)
+            ])
+
+            blurEffectView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+
+        } else {
+            setGradientBackgroundColor(colorOne: .systemPurple, colorTwo: .systemIndigo)
+            setCellShadow()
+        }
+    }
+
     private func setGradientBackgroundColor(colorOne: UIColor, colorTwo: UIColor) {
         gradientLayer.frame = bounds
         gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.locations = [0.0, 1.1]
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.cornerRadius = 3

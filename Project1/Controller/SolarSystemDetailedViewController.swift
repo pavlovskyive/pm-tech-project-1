@@ -13,6 +13,15 @@ class SolarSystemDetailedViewController: BaseViewController {
 
     var timerControl: TimerSegmentedControl?
 
+    override var backgroundImage: UIImage? {
+        get {
+            return UIImage(named: "SolarSystemBackground")
+        }
+        set {
+            super.backgroundImage = newValue
+        }
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
 

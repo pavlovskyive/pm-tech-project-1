@@ -12,10 +12,19 @@ class UniversesViewController: BaseViewController {
     // Link to Storage instance
     var storage: Storage?
 
+    override var backgroundImage: UIImage? {
+        get {
+            return UIImage(named: "UniversesBackground")
+        }
+        set {
+            super.backgroundImage = newValue
+        }
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
-        navigationItem.title = "Universes"
+        title = "Universes"
 
         navigationItem.setRightBarButton(
             UIBarButtonItem(

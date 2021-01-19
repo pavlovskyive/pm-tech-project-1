@@ -26,6 +26,8 @@ class BaseViewController: UIViewController {
 
     lazy private var collectionView = setCollectionView()
 
+    var backgroundImage: UIImage?
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,12 @@ class BaseViewController: UIViewController {
         timerControl.addTarget(self, action: #selector(handleSegmentedControllValueChanged), for: .valueChanged)
 
         navigationItem.titleView = timerControl
+
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
+
+        navigationController?.navigationBar.largeTitleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -98,6 +106,12 @@ extension BaseViewController {
 
         collectionView.delegate = self
         collectionView.dataSource = self
+
+        let imageView = UIImageView()
+        imageView.image = backgroundImage
+        imageView.contentMode = .scaleAspectFill
+
+        collectionView.backgroundView = imageView
 
         view.addSubview(collectionView)
 

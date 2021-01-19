@@ -18,9 +18,13 @@ final class TimerSegmentedControl: UISegmentedControl {
     }
 
     convenience init() {
-        let pauseImage = UIImage(systemName: "pause")!
-        let playImage = UIImage(systemName: "play")!
-        let maxSpeedImage = UIImage(systemName: "forward")!
+        guard let pauseImage = UIImage(systemName: "pause")?
+                .withTintColor(.white, renderingMode: .alwaysOriginal),
+              let playImage = UIImage(systemName: "play")?
+                .withTintColor(.white, renderingMode: .alwaysOriginal),
+              let maxSpeedImage = UIImage(systemName: "forward")?
+                .withTintColor(.white, renderingMode: .alwaysOriginal)
+        else { fatalError("It can't be, can it?") }
 
         self.init(items: [pauseImage, playImage, maxSpeedImage])
     }
@@ -35,7 +39,7 @@ extension TimerSegmentedControl {
     // MARK: - Setup
 
     func setup() {
-
+        selectedSegmentTintColor = .systemIndigo
         sizeToFit()
         selectedSegmentIndex = 1
     }

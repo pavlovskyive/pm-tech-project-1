@@ -11,6 +11,24 @@ class SolarSystemsViewController: BaseViewController {
 
     var galaxy: Galaxy?
 
+    override var backgroundImage: UIImage? {
+        get {
+            switch galaxy?.type {
+            case .elliptical:
+                return UIImage(named: "EllipticalGalaxyBackground")
+            case .irregular:
+                return UIImage(named: "IrregularGalaxyBackground")
+            case .spiral:
+                return UIImage(named: "SpiralGalaxyBackground")
+            default:
+                fatalError("Expand here")
+            }
+        }
+        set {
+            super.backgroundImage = newValue
+        }
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
 

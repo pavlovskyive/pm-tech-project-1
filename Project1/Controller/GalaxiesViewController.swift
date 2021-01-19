@@ -11,10 +11,19 @@ class GalaxiesViewController: BaseViewController {
 
     var universe: Universe?
 
+    override var backgroundImage: UIImage? {
+        get {
+            return UIImage(named: "GalaxiesBackground")
+        }
+        set {
+            super.backgroundImage = newValue
+        }
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
-        title =  "\(universe?.shortName ?? "") Galaxies"
+        title = "\(universe?.shortName ?? "") Galaxies"
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
