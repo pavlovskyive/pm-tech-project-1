@@ -7,7 +7,7 @@
 
 import GameplayKit.GKState
 
-class SolarSystemDetailedState: State {
+final class SolarSystemDetailedState: State {
 
     var solarSystem: SolarSystem?
 

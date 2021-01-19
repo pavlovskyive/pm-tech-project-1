@@ -35,6 +35,7 @@ extension TimerSegmentedControl {
     // MARK: - Setup
 
     func setup() {
+
         sizeToFit()
         selectedSegmentIndex = 1
     }

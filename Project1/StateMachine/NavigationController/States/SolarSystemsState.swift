@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SolarSystemsState: State {
+final class SolarSystemsState: State {
 
     var galaxy: Galaxy?
 

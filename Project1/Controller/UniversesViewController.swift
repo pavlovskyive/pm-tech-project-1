@@ -7,45 +7,15 @@
 
 import UIKit
 
-class UniversesViewController: UIViewController {
+class UniversesViewController: BaseViewController {
 
+    // Link to Storage instance
     var storage: Storage?
-    var timer: RepeatingTimer? {
-        didSet {
-            timer?.addListener(self)
-        }
-    }
-    var stateMachine: NavigationControllerStateMachine?
 
-    lazy private var collectionView = DoubleColumnCollectionView()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
 
-    private var timerControl = TimerSegmentedControl()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-
-        title = "Universes"
-
-        setupNavigationBarController()
-        setupCollectionView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-        print("Received memory warning")
-    }
-}
-
-extension UniversesViewController {
-
-    fileprivate func setupNavigationBarController() {
-        navigationController?.navigationBar.shadowImage = UIImage()
-
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+        navigationItem.title = "Universes"
 
         navigationItem.setRightBarButton(
             UIBarButtonItem(
@@ -53,51 +23,29 @@ extension UniversesViewController {
                 target: self,
                 action: #selector(handleAddButton)),
             animated: true)
-
-        timerControl.addTarget(self, action: #selector(handleSegmentedControllValueChanged), for: .valueChanged)
-        self.navigationItem.titleView = timerControl
-
     }
 
-    fileprivate func setupCollectionView() {
+    override func setupCell(cell: RoundedCollectionViewCell, indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        view.addSubview(collectionView)
-
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-}
-
-extension UniversesViewController: TimerListener {
-    @objc func handleTick() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        guard let universe = storage?.universes[indexPath.row] else {
+            return cell
         }
+
+        cell.titleLabel.text = universe.name
+        cell.secondaryLabel.text = "\(universe.age)"
+        cell.iconImageView.image = UIImage(systemName: "camera.filters")
+
+        return cell
+    }
+
+    override func handleCellSelection(indexPath: IndexPath) {
+        let galaxiesStage = GalaxiesState()
+        galaxiesStage.universe = storage?.universes[indexPath.row]
+        stateMachine?.enter(galaxiesStage)
     }
 }
 
 extension UniversesViewController {
-
-    @objc func handleSegmentedControllValueChanged() {
-        switch timerControl.selectedSegmentIndex {
-        case 0:
-            timer?.suspend()
-        case 1:
-            timer?.resume()
-        case 2:
-            timer?.faster()
-        default:
-            break
-        }
-    }
 
     @objc func handleAddButton() {
         let alertController = UIAlertController(
@@ -111,13 +59,9 @@ extension UniversesViewController {
             let answer = alertController.textFields![0]
             let text = answer.text ?? ""
 
-//            self.viewModel.createUniverse(
-//                name: text,
-//                blackHoleThresholdMass: 50,
-//                blackHoleThresholdRadius: 50)
             self.storage?.createUniverse(name: text)
 
-            self.collectionView.reloadData()
+            super.reloadCollectionView()
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -128,52 +72,11 @@ extension UniversesViewController {
 
         present(alertController, animated: true)
     }
-
-    @objc func handleEditButton() {
-        print("Edit cell")
-    }
 }
 
-extension UniversesViewController: UICollectionViewDataSource {
+extension UniversesViewController {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         storage?.universes.count ?? 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        guard let cell = collectionView
-                .dequeueReusableCell(withReuseIdentifier: "RoundedCell",
-                                     for: indexPath) as? RoundedCollectionViewCell
-        else {
-            fatalError("Could not cast cell as RoundedCollectionViewCell")
-        }
-
-        cell.editButton.addTarget(
-            self,
-            action: #selector(handleEditButton),
-            for: .touchUpInside)
-
-        guard let universe = storage?.universes[indexPath.row] else {
-            return cell
-        }
-
-        cell.titleLabel.text = universe.name
-        cell.secondaryLabel.text = "Age: \(universe.age)"
-        cell.iconImageView.image = UIImage(systemName: "camera.filters")
-
-        return cell
-    }
-}
-
-extension UniversesViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let galaxiesStage = GalaxiesState()
-        galaxiesStage.universe = storage?.universes[indexPath.row]
-        stateMachine?.enter(galaxiesStage)
-        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

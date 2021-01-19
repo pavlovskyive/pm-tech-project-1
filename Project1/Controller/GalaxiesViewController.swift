@@ -7,134 +7,36 @@
 
 import UIKit
 
-class GalaxiesViewController: UIViewController {
+class GalaxiesViewController: BaseViewController {
 
-    var universe: Universe? {
-        didSet {
-            title = universe?.name
-        }
-    }
+    var universe: Universe?
 
-    var timer: RepeatingTimer? {
-        didSet {
-            timer?.addListener(self)
-        }
-    }
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
 
-    var stateMachine: NavigationControllerStateMachine?
-
-    lazy private var collectionView = DoubleColumnCollectionView()
-
-    var timerControl: TimerSegmentedControl?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setupNavigationBarController()
-        setupCollectionView()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        collectionView.reloadData()
-    }
-}
-
-extension GalaxiesViewController {
-
-    fileprivate func setupNavigationBarController() {
-        navigationController?.navigationBar.shadowImage = UIImage()
-
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
+        title =  "\(universe?.shortName ?? "") Galaxies"
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
-
-        self.navigationItem.titleView = timerControl
-
-        title = "\(universe?.name ?? "")"
     }
 
-    fileprivate func setupCollectionView() {
-
-        collectionView.delegate = self
-        collectionView.dataSource = self
-
-        view.addSubview(collectionView)
-
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-}
-
-extension GalaxiesViewController: TimerListener {
-
-    @objc func handleTick() {
-
-        DispatchQueue.main.async {
-            if self.view.window != nil {
-                self.collectionView.reloadData()
-            }
-        }
-    }
-}
-
-extension GalaxiesViewController {
-
-    @objc func handleEditButton() {
-        print("Edit cell")
-    }
-
-    @objc func handleBackButton() {
-        stateMachine?.enter(UniversesState())
-    }
-}
-
-extension GalaxiesViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func getCellCount() -> Int {
         universe?.galaxies.count ?? 0
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        guard let cell = collectionView
-                .dequeueReusableCell(
-                    withReuseIdentifier: "RoundedCell",
-                    for: indexPath) as? RoundedCollectionViewCell
-        else {
-            fatalError("Could not cast cell as RoundedCollectionViewCell")
+    override func setupCell(cell: RoundedCollectionViewCell, indexPath: IndexPath) -> RoundedCollectionViewCell {
+        guard let galaxy = universe?.galaxies[indexPath.row] else {
+            return cell
         }
 
-        cell.editButton.addTarget(
-            self,
-            action: #selector(handleEditButton),
-            for: .touchUpInside)
-
-        let galaxy = universe?.galaxies[indexPath.row]
-
-        let name = galaxy?.name
-        let age = galaxy?.age ?? 0
-        let type = galaxy?.type.rawValue ?? "Spiral"
-        let mass = galaxy?.mass ?? 0
+        let name = galaxy.name
+        let age = galaxy.age
+        let type = galaxy.type.rawValue
+        let mass = galaxy.mass
 
         var image: UIImage
 
-        switch galaxy?.type {
+        switch galaxy.type {
         case .spiral:
             image = UIImage(systemName: "hurricane")!
         case .elliptical:
@@ -150,16 +52,21 @@ extension GalaxiesViewController: UICollectionViewDataSource {
 
         return cell
     }
-}
 
-extension GalaxiesViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let galaxy = universe?.galaxies[indexPath.row] else { return }
+    override func handleCellSelection(indexPath: IndexPath) {
+        guard let galaxy = universe?.galaxies[indexPath.row] else {
+            return
+        }
 
         let solarSystemsState = SolarSystemsState()
         solarSystemsState.galaxy = galaxy
         stateMachine?.enter(solarSystemsState)
-        collectionView.deselectItem(at: indexPath, animated: true)
+    }
+}
+
+extension GalaxiesViewController {
+
+    @objc func handleBackButton() {
+        stateMachine?.enter(UniversesState())
     }
 }

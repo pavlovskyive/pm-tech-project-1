@@ -14,6 +14,16 @@ final class Universe {
     // Universe name.
     private(set) var name: String
 
+    // Short name to identify itself in child's names.
+    var shortName: String {
+        guard let firstLetter = name.first,
+              let number = Int(name.split(separator: " ").last ?? "") else {
+            return ""
+        }
+
+        return "\(firstLetter)\(number)"
+    }
+
     // Age is used for time based methods.
     private(set) var age: UInt = 0
 
@@ -43,7 +53,7 @@ extension Universe {
 
     // Create new Galaxy in current Universe.
     private func newGalaxy() {
-        let galaxy = Galaxy(name: "Galaxy \(galaxies.count + 1)")
+        let galaxy = Galaxy(name: "\(shortName)G\(galaxies.count + 1)")
 
         galaxy.universe = self
         galaxies.append(galaxy)

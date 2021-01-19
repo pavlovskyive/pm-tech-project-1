@@ -67,7 +67,8 @@ extension Galaxy {
 
     // Create new Solar System in current Galaxy.
     private func newSolarSystem() {
-        let solarSystem = SolarSystem(name: "Solar System \(solarSystems.count + 1)")
+        let solarSystemName = "\(name)S\(solarSystems.count + 1)"
+        let solarSystem = SolarSystem(name: solarSystemName)
 
         solarSystem.galaxy = self
         solarSystems.append(solarSystem)

@@ -24,7 +24,7 @@ extension Storage {
         if name.isEmpty {
             universes.append(
                 Universe(
-                    name: "New Universe \(universes.count + 1)",
+                    name: "Universe \(universes.count + 1)",
                     blackHoleThresholdMass: blackHoleThresholdMass,
                     blackHoleThresholdRadius: blackHoleThresholdRadius))
         } else {

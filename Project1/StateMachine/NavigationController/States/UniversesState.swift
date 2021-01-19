@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UniversesState: State {
+final class UniversesState: State {
 
     override func didEnter(from previousState: State?) {
         (stateMachine as? NavigationControllerStateMachine)?.presenter
