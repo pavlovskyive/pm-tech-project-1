@@ -7,13 +7,20 @@
 
 import Foundation
 
+protocol SolarSystemDelegate: AnyObject {
+    func handleDestruction(of solarSystem: SolarSystem)
+}
+
 final class SolarSystem {
 
     // MARK: - Variables
-
-    // Link to parent Galaxy.
-    weak var galaxy: Galaxy?
-
+    
+    // Star Delegate.
+    weak var starDelegate: StarDelegate?
+    
+    // Solar System Delegate.
+    weak var delegate: SolarSystemDelegate?
+    
     // Solar System name.
     private(set) var name: String
 
@@ -21,10 +28,13 @@ final class SolarSystem {
     private(set) var age: UInt = 0
 
     // Host-Star of Solar System.
-    private(set) var star: Star
+    private(set) var star: Star?
 
     // Planets in Solar System.
     private(set) var planets = [Planet]()
+    
+    var blackHoleThresholdMass: UInt?
+    var blackHoleThresholdRadius: UInt?
 
     // MARK: - Lifecycle
 
@@ -32,8 +42,10 @@ final class SolarSystem {
         self.name = name
 
         // Create Host-Star and asign its Solar System to this.
-        star = Star(name: "Hosting Star")
-        star.solarSystem = self
+        star = Star(name: "Hosting Star",
+                    blackHoleThresholdMass: blackHoleThresholdMass ?? 60,
+                    blackHoleThresholdRadius: blackHoleThresholdRadius ?? 60)
+        star?.delegate = self
     }
 }
 
@@ -43,7 +55,7 @@ extension SolarSystem {
 
     // Mass of Solar System is computed as sum of Sun and all Planets (with sattelites) inside it.
     var mass: UInt {
-        planets.reduce(star.mass) { $0 + $1.mass }
+        planets.reduce(star?.mass ?? 0) { $0 + $1.mass }
     }
 }
 
@@ -58,9 +70,8 @@ extension SolarSystem {
 
     // Create new Planet in current Solar System.
     private func newPlanet() {
-        let planet = Planet(name: "Planet \(planets.count + 1)")
-
-        planet.solarSystem = self
+        let planet = Planet(name: "Planet \(planets.count + 1)", isSatellite: false)
+        
         planets.append(planet)
     }
 }
@@ -80,6 +91,15 @@ extension SolarSystem: TimerListener {
         }
 
         // Call updates on Host-Star.
-        star.handleTick()
+        star?.handleTick()
+    }
+}
+
+extension SolarSystem: StarDelegate {
+    func handleBecomingBlackHole(of star: Star) {
+        
+        starDelegate?.handleBecomingBlackHole(of: star)
+        delegate?.handleDestruction(of: self)
+        self.star = nil
     }
 }

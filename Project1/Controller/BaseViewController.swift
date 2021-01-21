@@ -18,9 +18,6 @@ class BaseViewController: UIViewController {
         }
     }
 
-    // State Machine instance
-    var stateMachine: NavigationControllerStateMachine?
-
     // Timer speed switch
     lazy private var timerControl = TimerSegmentedControl()
 

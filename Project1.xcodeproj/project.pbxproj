@@ -24,11 +24,6 @@
 		796A0F2325B4144A00DA3F9F /* DoubleColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */; };
 		796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */; };
 		79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */; };
-		79B87CDF25B4868F003EC34C /* NavigationControllerStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CDE25B4868F003EC34C /* NavigationControllerStateMachine.swift */; };
-		79B87CE325B48716003EC34C /* UniversesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CE225B48716003EC34C /* UniversesState.swift */; };
-		79B87CF325B49EB3003EC34C /* GalaxiesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CF225B49EB3003EC34C /* GalaxiesState.swift */; };
-		79B87CF925B4B44D003EC34C /* SolarSystemsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */; };
-		79B87CFF25B4BA82003EC34C /* SolarSystemDetailedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */; };
 		79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */; };
 		79C26E3B25B2DF3100761D31 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3A25B2DF3100761D31 /* Star.swift */; };
 		79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3D25B2DF4800761D31 /* Planet.swift */; };
@@ -59,11 +54,6 @@
 		796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnFlowLayout.swift; sourceTree = "<group>"; };
 		796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnCollectionView.swift; sourceTree = "<group>"; };
 		79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystem.swift; sourceTree = "<group>"; };
-		79B87CDE25B4868F003EC34C /* NavigationControllerStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerStateMachine.swift; sourceTree = "<group>"; };
-		79B87CE225B48716003EC34C /* UniversesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesState.swift; sourceTree = "<group>"; };
-		79B87CF225B49EB3003EC34C /* GalaxiesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesState.swift; sourceTree = "<group>"; };
-		79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemsState.swift; sourceTree = "<group>"; };
-		79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedState.swift; sourceTree = "<group>"; };
 		79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesViewController.swift; sourceTree = "<group>"; };
 		79C26E3A25B2DF3100761D31 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		79C26E3D25B2DF4800761D31 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
@@ -153,15 +143,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		79528DF725B573B8005CEF35 /* NavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				79B87CE525B4871F003EC34C /* States */,
-				79B87CDE25B4868F003EC34C /* NavigationControllerStateMachine.swift */,
-			);
-			path = NavigationController;
-			sourceTree = "<group>";
-		};
 		796A0F2525B41A9600DA3F9F /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,21 +203,9 @@
 		79B87CDD25B4867A003EC34C /* StateMachine */ = {
 			isa = PBXGroup;
 			children = (
-				79528DF725B573B8005CEF35 /* NavigationController */,
 				79528DEF25B5734D005CEF35 /* Base */,
 			);
 			path = StateMachine;
-			sourceTree = "<group>";
-		};
-		79B87CE525B4871F003EC34C /* States */ = {
-			isa = PBXGroup;
-			children = (
-				79B87CE225B48716003EC34C /* UniversesState.swift */,
-				79B87CF225B49EB3003EC34C /* GalaxiesState.swift */,
-				79B87CF825B4B44D003EC34C /* SolarSystemsState.swift */,
-				79B87CFE25B4BA82003EC34C /* SolarSystemDetailedState.swift */,
-			);
-			path = States;
 			sourceTree = "<group>";
 		};
 		79C26E4725B2E5D900761D31 /* Controller */ = {
@@ -342,17 +311,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79B87CF925B4B44D003EC34C /* SolarSystemsState.swift in Sources */,
 				79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */,
 				79DB5E0625B5850F007CBC7E /* WeakEventListener.swift in Sources */,
 				794F29B325B058D8007FF79F /* Universe.swift in Sources */,
-				79B87CE325B48716003EC34C /* UniversesState.swift in Sources */,
 				7915BDE025B6134900F3CCA8 /* BaseViewController.swift in Sources */,
 				7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */,
 				79C26E3B25B2DF3100761D31 /* Star.swift in Sources */,
 				7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */,
 				79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */,
-				79B87CFF25B4BA82003EC34C /* SolarSystemDetailedState.swift in Sources */,
 				79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */,
 				79F520B325B309850001F60E /* SolarSystemsViewController.swift in Sources */,
 				794F29A725B05698007FF79F /* Galaxy.swift in Sources */,
@@ -362,11 +328,9 @@
 				79C26E4125B2E04B00761D31 /* TimerListener.swift in Sources */,
 				796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */,
 				7915BDDD25B6095700F3CCA8 /* Extension.swift in Sources */,
-				79B87CF325B49EB3003EC34C /* GalaxiesState.swift in Sources */,
 				79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */,
 				79C26E4425B2E07900761D31 /* Storage.swift in Sources */,
 				79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */,
-				79B87CDF25B4868F003EC34C /* NavigationControllerStateMachine.swift in Sources */,
 				7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */,
 				79528DF525B5737B005CEF35 /* StateMachine.swift in Sources */,
 				79528DF125B57358005CEF35 /* State.swift in Sources */,

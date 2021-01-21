@@ -48,9 +48,15 @@ class UniversesViewController: BaseViewController {
     }
 
     override func handleCellSelection(indexPath: IndexPath) {
-        let galaxiesStage = GalaxiesState()
-        galaxiesStage.universe = storage?.universes[indexPath.row]
-        stateMachine?.enter(galaxiesStage)
+        
+        guard let universe = storage?.universes[indexPath.row] else {
+            return
+        }
+        
+        let galaxiesViewController = GalaxiesViewController()
+        galaxiesViewController.universe = universe
+        galaxiesViewController.timer = timer
+        navigationController?.pushViewController(galaxiesViewController, animated: true)
     }
 }
 

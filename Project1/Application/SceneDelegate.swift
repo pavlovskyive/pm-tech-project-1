@@ -25,20 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = UniversesViewController()
 
         let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.interactivePopGestureRecognizer?.isEnabled = false
-
-        let viewControllerStateMachine = NavigationControllerStateMachine(
-            presenter: navigationController,
-            storage: storage,
-            timer: timer)
 
         viewController.storage = storage
         viewController.timer = timer
-        viewController.stateMachine = viewControllerStateMachine
 
         timer.addListener(storage)
-
-        viewControllerStateMachine.enter(UniversesState())
 
         window.rootViewController = navigationController
 

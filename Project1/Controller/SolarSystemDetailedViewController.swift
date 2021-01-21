@@ -26,9 +26,6 @@ class SolarSystemDetailedViewController: BaseViewController {
         super.setupNavigationBar()
 
         title = "Solar System \(solarSystem?.name ?? "")"
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
     }
 
     override func setCollectionView() -> DoubleColumnCollectionView {
@@ -56,20 +53,6 @@ class SolarSystemDetailedViewController: BaseViewController {
     }
 
     override func handleCellSelection(indexPath: IndexPath) {}
-}
-
-extension SolarSystemDetailedViewController {
-
-    @objc func handleBackButton() {
-        guard let solarSystem = solarSystem else {
-            return
-        }
-
-        let solarSystemsState = SolarSystemsState()
-        solarSystemsState.galaxy = solarSystem.galaxy
-
-        stateMachine?.enter(solarSystemsState)
-    }
 }
 
 extension SolarSystemDetailedViewController {

@@ -22,14 +22,17 @@ enum StarType: String, CaseIterable {
     case white = "White"
 }
 
-class Star {
+protocol StarDelegate: AnyObject {
+    func handleBecomingBlackHole(of star: Star)
+}
+
+final class Star {
 
     // MARK: - Variables
 
-    // Link to parent Solar System
-    weak var solarSystem: SolarSystem?
-    weak var galaxy: Galaxy?
-
+    // Star delegate.
+    weak var delegate: StarDelegate?
+    
     // Star name.
     private(set) var name: String
 
@@ -59,12 +62,13 @@ class Star {
     private(set) var radiusThreshold: UInt
 
     // MARK: - Lifecycle
-    init(name: String) {
+    init(name: String,
+         blackHoleThresholdMass: UInt,
+         blackHoleThresholdRadius: UInt) {
         self.name = name
 
-        // Set threshold parameters for Star to became a Black Hole from its Universe.
-        massThreshold = solarSystem?.galaxy?.universe?.blackHoleThresholdMass ?? 60
-        radiusThreshold = solarSystem?.galaxy?.universe?.blackHoleThresholdRadius ?? 60
+        self.massThreshold = blackHoleThresholdMass 
+        self.radiusThreshold = blackHoleThresholdRadius
     }
 }
 
@@ -100,11 +104,7 @@ extension Star {
 
     // Handle Star becoming Black Hole.
     private func handleBecomingBlackHole() {
-        print("Star became a Black Hole!")
-
-        guard let galaxy = solarSystem?.galaxy else { return }
-        galaxy.handleBecomingBlackHole(of: self, in: solarSystem!)
-        solarSystem = nil
+        delegate?.handleBecomingBlackHole(of: self)
     }
 }
 

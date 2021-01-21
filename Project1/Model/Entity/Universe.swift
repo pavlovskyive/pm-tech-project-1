@@ -27,6 +27,7 @@ final class Universe {
     // Age is used for time based methods.
     private(set) var age: UInt = 0
 
+    // Threshold parameters for Star to became a Black Hole.
     private(set) var blackHoleThresholdMass: UInt
     private(set) var blackHoleThresholdRadius: UInt
 
@@ -55,7 +56,9 @@ extension Universe {
     private func newGalaxy() {
         let galaxy = Galaxy(name: "\(shortName)G\(galaxies.count + 1)")
 
-        galaxy.universe = self
+        galaxy.blackHoleThresholdMass = blackHoleThresholdMass
+        galaxy.blackHoleThresholdRadius = blackHoleThresholdRadius
+
         galaxies.append(galaxy)
     }
 

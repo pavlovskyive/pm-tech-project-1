@@ -18,9 +18,6 @@ final class Galaxy {
 
     // MARK: - Variables
 
-    // Link to parent Universe.
-    weak var universe: Universe?
-
     // Galaxy name.
     private(set) var name: String
 
@@ -35,6 +32,9 @@ final class Galaxy {
 
     // Black holes inside current Galaxy.
     private(set) var blackHoles = [Star]()
+    
+    var blackHoleThresholdMass: UInt?
+    var blackHoleThresholdRadius: UInt?
 
     // MARK: - Lifecycle
 
@@ -70,7 +70,6 @@ extension Galaxy {
         let solarSystemName = "\(name)S\(solarSystems.count + 1)"
         let solarSystem = SolarSystem(name: solarSystemName)
 
-        solarSystem.galaxy = self
         solarSystems.append(solarSystem)
     }
 
@@ -80,24 +79,12 @@ extension Galaxy {
     public func collide(with galaxy: Galaxy) {
         print("Galaxy (mass \(mass)) collides with galaxy (mass: \(galaxy.mass))")
 
-        galaxy.solarSystems.forEach { $0.galaxy = self }
-        galaxy.blackHoles.forEach { $0.galaxy = self}
         solarSystems.append(contentsOf: galaxy.solarSystems)
         blackHoles.append(contentsOf: galaxy.blackHoles)
-        galaxy.solarSystems = []
-        galaxy.blackHoles = []
+        galaxy.solarSystems.removeAll()
+        galaxy.blackHoles.removeAll()
 
         solarSystems.removeSubrange(0..<solarSystems.count / 10)
-    }
-
-    // Handle Star becoming Black Hole.
-    public func handleBecomingBlackHole(of star: Star, in solarSystem: SolarSystem) {
-        blackHoles.append(star)
-
-        guard let index = solarSystems
-                .firstIndex(where: { $0 === star.solarSystem }) else { return }
-
-        solarSystems.remove(at: index)
     }
 }
 
@@ -117,5 +104,21 @@ extension Galaxy: TimerListener {
 
         // Call updates on every Solar System in current Galaxy.
         solarSystems.forEach { $0.handleTick() }
+    }
+}
+
+extension Galaxy: StarDelegate {
+    func handleBecomingBlackHole(of star: Star) {
+        blackHoles.append(star)
+    }
+}
+
+extension Galaxy: SolarSystemDelegate {
+    func handleDestruction(of solarSystem: SolarSystem) {
+        
+        let index = solarSystems.firstIndex { $0 === solarSystem}
+        if index != nil {
+            solarSystems.remove(at: index!)
+        }
     }
 }

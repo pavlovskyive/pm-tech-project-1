@@ -24,9 +24,6 @@ class GalaxiesViewController: BaseViewController {
         super.setupNavigationBar()
 
         title = "\(universe?.shortName ?? "") Galaxies"
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Back", style: .plain, target: self, action: #selector(handleBackButton))
     }
 
     override func getCellCount() -> Int {
@@ -63,19 +60,15 @@ class GalaxiesViewController: BaseViewController {
     }
 
     override func handleCellSelection(indexPath: IndexPath) {
+
         guard let galaxy = universe?.galaxies[indexPath.row] else {
             return
         }
+        
+        let solarSystemsViewController = SolarSystemsViewController()
+        solarSystemsViewController.galaxy = galaxy
+        solarSystemsViewController.timer = timer
+        navigationController?.pushViewController(solarSystemsViewController, animated: true)
 
-        let solarSystemsState = SolarSystemsState()
-        solarSystemsState.galaxy = galaxy
-        stateMachine?.enter(solarSystemsState)
-    }
-}
-
-extension GalaxiesViewController {
-
-    @objc func handleBackButton() {
-        stateMachine?.enter(UniversesState())
     }
 }

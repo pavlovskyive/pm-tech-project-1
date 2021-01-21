@@ -19,12 +19,6 @@ class Planet {
 
     // MARK: - Variables
 
-    // Link to parent Solar System.
-    weak var solarSystem: SolarSystem?
-
-    // Link to parent Planet (if current Planet is a Sattelite).
-    weak var hostPlanet: Planet?
-
     // Planet name.
     private(set) var name: String
 
@@ -46,27 +40,23 @@ class Planet {
     // MARK: - Lifecycle
 
     // Init for Planet.
-    init(name: String) {
+    init(name: String, isSatellite: Bool) {
+        
         self.name = name
 
+        guard isSatellite == true else {
+            return
+        }
+        
         // Get random number of sattelites.
         var sattelitesNumber = Int.random(in: 0...5)
 
         // Append Sattelites.
         while sattelitesNumber > 0 {
             sattelites.append(
-                Planet(
-                    name: "Sattelite \(sattelites.count)",
-                    hostPlanet: self))
+                Planet(name: "Sattelite \(sattelites.count)", isSatellite: true))
             sattelitesNumber -= 1
         }
-    }
-
-    // Init for Sattelites.
-    init(name: String, hostPlanet: Planet?) {
-        self.name = name
-
-        self.hostPlanet = hostPlanet
     }
 }
 
