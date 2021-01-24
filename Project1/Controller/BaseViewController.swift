@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
     // Timer instance
     var timer: RepeatingTimer? {
         didSet {
-            timer?.addListener(self)
+            timer?.addDelegate(self)
         }
     }
 
@@ -59,7 +59,12 @@ class BaseViewController: UIViewController {
         return DoubleColumnCollectionView()
     }
 
-    func getCellCount() -> Int {
+    func getSectionsCount() -> Int {
+        // By default.
+        return 1
+    }
+
+    func getCellCount(for section: Int) -> Int {
         fatalError("Must Override")
     }
 
@@ -125,8 +130,12 @@ extension BaseViewController {
 // Collection View Data Source
 extension BaseViewController: UICollectionViewDataSource {
 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return getSectionsCount()
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getCellCount()
+        return getCellCount(for: section)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -154,7 +163,7 @@ extension BaseViewController: UICollectionViewDelegate {
 }
 
 // MARK: - Timer handler
-extension BaseViewController: TimerListener {
+extension BaseViewController: TimerDelegate {
 
     @objc func handleTick() {
         reloadCollectionView()

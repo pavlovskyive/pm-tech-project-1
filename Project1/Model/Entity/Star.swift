@@ -32,7 +32,7 @@ final class Star {
 
     // Star delegate.
     weak var delegate: StarDelegate?
-    
+
     // Star name.
     private(set) var name: String
 
@@ -67,7 +67,7 @@ final class Star {
          blackHoleThresholdRadius: UInt) {
         self.name = name
 
-        self.massThreshold = blackHoleThresholdMass 
+        self.massThreshold = blackHoleThresholdMass
         self.radiusThreshold = blackHoleThresholdRadius
     }
 }
@@ -104,15 +104,17 @@ extension Star {
 
     // Handle Star becoming Black Hole.
     private func handleBecomingBlackHole() {
+        print("\(name) becomes a Black Hole")
+        self.name = "Ex " + String(name.split(separator: " ").first ?? "") + " BH"
         delegate?.handleBecomingBlackHole(of: self)
     }
 }
 
-extension Star: TimerListener {
+extension Star: TimerDelegate {
 
     // MARK: - Chain of Responsibility
 
-    func handleTick() {
+    public func handleTick() {
 
         // It is not neccessary to change Star age or stage after it's on final stage.
         if stage == .dwarf || stage == .blackHole {

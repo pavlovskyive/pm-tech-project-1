@@ -41,13 +41,13 @@ class Planet {
 
     // Init for Planet.
     init(name: String, isSatellite: Bool) {
-        
+
         self.name = name
 
-        guard isSatellite == true else {
+        guard isSatellite == false else {
             return
         }
-        
+
         // Get random number of sattelites.
         var sattelitesNumber = Int.random(in: 0...5)
 

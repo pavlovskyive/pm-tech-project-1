@@ -22,6 +22,18 @@ class SolarSystemDetailedViewController: BaseViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        solarSystem?.addDelegate(delegate: self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        solarSystem?.removeDelegate(delegate: self)
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
@@ -32,7 +44,7 @@ class SolarSystemDetailedViewController: BaseViewController {
         return DoubleColumnCollectionViewWithHeader()
     }
 
-    override func getCellCount() -> Int {
+    override func getCellCount(for section: Int) -> Int {
         solarSystem?.planets.count ?? 0
     }
 
@@ -43,11 +55,13 @@ class SolarSystemDetailedViewController: BaseViewController {
         }
 
         let name = planet.name
+        let type = planet.type.rawValue
         let mass = planet.mass
+        let numberOfSattelites = planet.sattelites.count
 
         cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Mass: \(mass)"
-        cell.iconImageView.image = UIImage(systemName: "camera.filters")
+        cell.secondaryLabel.text = "Type: \(type)\nMass: \(mass)\nSattelites: \(numberOfSattelites)"
+        cell.iconImageView.image = UIImage(systemName: "globe")
 
         return cell
     }
@@ -70,16 +84,43 @@ extension SolarSystemDetailedViewController {
             fatalError("Could not cast cell as RoundedCollectionViewCell")
         }
 
-        let star = solarSystem?.star
+        guard let star = solarSystem?.star else {
+            return cell
+        }
 
-        let name = star?.name ?? ""
-        let age = star?.age ?? 0
-        let mass = star?.mass ?? 0
+        let name = star.name
+        let type = star.type.rawValue
+        let stage = star.stage.rawValue
+        let mass = star.mass
+        let temperature = star.temperature
+        let radius = star.radius
+        let luminosity = star.luminosity
 
         cell.titleLabel.text = "\(name)"
-        cell.secondaryLabel.text = "Age: \(age)\nMass: \(mass)"
-        cell.iconImageView.image = UIImage(systemName: "camera.filters")
+        cell.secondaryLabel.text = "Type: \(type)\n" + "Evolution Stage: \(stage)\n" +
+            "Mass: \(mass)    Temperature: \(temperature)\n" +
+            "Radius: \(radius)    Luminosity: \(luminosity)"
+
+        cell.iconImageView.image = UIImage(systemName: "staroflife")
 
         return cell
+    }
+}
+
+extension SolarSystemDetailedViewController: Alertable {
+
+}
+
+extension SolarSystemDetailedViewController: SolarSystemDelegate {
+    func handleDestruction(of solarSystem: SolarSystem) {
+        if solarSystem === self.solarSystem {
+            self.solarSystem = nil
+            DispatchQueue.main.async { [weak self] in
+                self?.timer?.suspend()
+                self?.navigationController?.popViewController(animated: true)
+                self?.showAlert(title: "Current Solar System has been destroyed",
+                          message: "You've been redirected to the previous screen")
+            }
+        }
     }
 }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+@objc protocol TimerDelegate {
+    func handleTick()
+}
+
 class RepeatingTimer {
 
     var timeInterval: TimeInterval
@@ -17,7 +21,7 @@ class RepeatingTimer {
 
     lazy private var timer: DispatchSourceTimer = setTimer()
 
-    var eventListeners = [WeakEventListener<TimerListener>]()
+    var delegates = MulticastDelegate<TimerDelegate>()
 
     enum State: Int {
         case suspended = 0
@@ -43,13 +47,11 @@ class RepeatingTimer {
     }
 
     func timerEvent() {
-        eventListeners.forEach { $0.value?.handleTick() }
+        delegates.invoke { $0.handleTick() }
     }
 
-    func addListener(_ listener: TimerListener) {
-        eventListeners.append(WeakEventListener(value: listener))
-
-        eventListeners = eventListeners.filter { $0.value != nil }
+    func addDelegate(_ delegate: TimerDelegate) {
+        delegates.add(delegate)
     }
 
     func resume() {

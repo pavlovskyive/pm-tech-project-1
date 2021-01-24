@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         viewController.storage = storage
         viewController.timer = timer
 
-        timer.addListener(storage)
+        timer.addDelegate(storage)
 
         window.rootViewController = navigationController
 

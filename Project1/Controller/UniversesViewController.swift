@@ -41,18 +41,18 @@ class UniversesViewController: BaseViewController {
         }
 
         cell.titleLabel.text = universe.name
-        cell.secondaryLabel.text = "\(universe.age)"
-        cell.iconImageView.image = UIImage(systemName: "camera.filters")
+        cell.secondaryLabel.text = "Time since creation: \(universe.age)"
+        cell.iconImageView.image = UIImage(systemName: "infinity")
 
         return cell
     }
 
     override func handleCellSelection(indexPath: IndexPath) {
-        
+
         guard let universe = storage?.universes[indexPath.row] else {
             return
         }
-        
+
         let galaxiesViewController = GalaxiesViewController()
         galaxiesViewController.universe = universe
         galaxiesViewController.timer = timer
@@ -63,29 +63,8 @@ class UniversesViewController: BaseViewController {
 extension UniversesViewController {
 
     @objc func handleAddButton() {
-        let alertController = UIAlertController(
-            title: "Universe Creation",
-            message: "Enter New Universe Name",
-            preferredStyle: .alert)
-
-        alertController.addTextField()
-
-        let submitAction = UIAlertAction(title: "Submit", style: .default) { _ in
-            let answer = alertController.textFields![0]
-            let text = answer.text ?? ""
-
-            self.storage?.createUniverse(name: text)
-
-            super.reloadCollectionView()
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-
-        alertController.addAction(submitAction)
-        alertController.addAction(cancelAction)
-        alertController.view.layoutIfNeeded()
-
-        present(alertController, animated: true)
+        self.storage?.createUniverse()
+        super.reloadCollectionView()
     }
 }
 

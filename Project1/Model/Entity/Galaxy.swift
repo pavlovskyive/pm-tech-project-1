@@ -14,9 +14,16 @@ enum GalaxyType: String, CaseIterable {
     case irregular = "Irregular"
 }
 
+protocol GalaxyDelegate: AnyObject {
+    func handleDestruction(of galaxy: Galaxy)
+}
+
 final class Galaxy {
 
     // MARK: - Variables
+
+    // Galaxy delegates.
+    weak var delegate: GalaxyDelegate?
 
     // Galaxy name.
     private(set) var name: String
@@ -32,7 +39,7 @@ final class Galaxy {
 
     // Black holes inside current Galaxy.
     private(set) var blackHoles = [Star]()
-    
+
     var blackHoleThresholdMass: UInt?
     var blackHoleThresholdRadius: UInt?
 
@@ -69,6 +76,8 @@ extension Galaxy {
     private func newSolarSystem() {
         let solarSystemName = "\(name)S\(solarSystems.count + 1)"
         let solarSystem = SolarSystem(name: solarSystemName)
+        solarSystem.addDelegate(delegate: self)
+        solarSystem.starDelegate = self
 
         solarSystems.append(solarSystem)
     }
@@ -77,22 +86,30 @@ extension Galaxy {
 
     // Collide with another Galaxy.
     public func collide(with galaxy: Galaxy) {
-        print("Galaxy (mass \(mass)) collides with galaxy (mass: \(galaxy.mass))")
+        print("Galaxy \(name) collides with galaxy \(galaxy.name)")
 
         solarSystems.append(contentsOf: galaxy.solarSystems)
         blackHoles.append(contentsOf: galaxy.blackHoles)
-        galaxy.solarSystems.removeAll()
-        galaxy.blackHoles.removeAll()
+
+        galaxy.destroy()
 
         solarSystems.removeSubrange(0..<solarSystems.count / 10)
     }
+
+    // Handle destruction of itself.
+    public func destroy() {
+        solarSystems.removeAll()
+        blackHoles.removeAll()
+
+        delegate?.handleDestruction(of: self)
+    }
 }
 
-extension Galaxy: TimerListener {
+extension Galaxy: TimerDelegate {
 
     // MARK: - Chain of Responsibility
 
-    func handleTick() {
+    public func handleTick() {
 
         // Increase age of current Galaxy.
         increaseAge()
@@ -108,15 +125,14 @@ extension Galaxy: TimerListener {
 }
 
 extension Galaxy: StarDelegate {
-    func handleBecomingBlackHole(of star: Star) {
+    public func handleBecomingBlackHole(of star: Star) {
         blackHoles.append(star)
     }
 }
 
 extension Galaxy: SolarSystemDelegate {
-    func handleDestruction(of solarSystem: SolarSystem) {
-        
-        let index = solarSystems.firstIndex { $0 === solarSystem}
+    public func handleDestruction(of solarSystem: SolarSystem) {
+        let index = solarSystems.firstIndex { $0.name == solarSystem.name}
         if index != nil {
             solarSystems.remove(at: index!)
         }

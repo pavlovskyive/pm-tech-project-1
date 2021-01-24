@@ -37,7 +37,8 @@ extension Storage {
     }
 
     // Conveniense Universe creation with default threshold parameters for Star to became a Black Hole.
-    func createUniverse(name: String) {
+    func createUniverse() {
+        let name = "Universe \(universes.count + 1)"
         createUniverse(
             name: name,
             blackHoleThresholdMass: 60,
@@ -45,7 +46,7 @@ extension Storage {
     }
 }
 
-extension Storage: TimerListener {
+extension Storage: TimerDelegate {
 
     // MARK: - Chain of Responsibility.
 

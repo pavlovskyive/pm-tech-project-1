@@ -44,7 +44,7 @@ final class RoundedCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 3
+        label.numberOfLines = 4
 
         label.translatesAutoresizingMaskIntoConstraints = false
 

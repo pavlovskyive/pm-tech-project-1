@@ -84,11 +84,11 @@ extension Universe {
     }
 }
 
-extension Universe: TimerListener {
+extension Universe: TimerDelegate {
 
     // MARK: - Chain of Responsibility
 
-    func handleTick() {
+    public func handleTick() {
 
         // Increase age of current Universe.
         increaseAge()

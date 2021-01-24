@@ -26,7 +26,7 @@ class GalaxiesViewController: BaseViewController {
         title = "\(universe?.shortName ?? "") Galaxies"
     }
 
-    override func getCellCount() -> Int {
+    override func getCellCount(for section: Int) -> Int {
         universe?.galaxies.count ?? 0
     }
 
@@ -46,14 +46,13 @@ class GalaxiesViewController: BaseViewController {
         case .spiral:
             image = UIImage(systemName: "hurricane")!
         case .elliptical:
-            image = UIImage(systemName: "record.circle")!
+            image = UIImage(systemName: "circlebadge.fill")!
         default:
             image = UIImage(systemName: "aqi.low")!
         }
 
         cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Age: \(age)\nType: \(type)\nMass: \(mass)"
-        cell.iconImageView.image = UIImage(systemName: "camera.filters")
+        cell.secondaryLabel.text = "Type: \(type)\nAge: \(age)\nMass: \(mass)"
         cell.iconImageView.image = image
 
         return cell
@@ -64,11 +63,10 @@ class GalaxiesViewController: BaseViewController {
         guard let galaxy = universe?.galaxies[indexPath.row] else {
             return
         }
-        
-        let solarSystemsViewController = SolarSystemsViewController()
+
+        let solarSystemsViewController = GalaxyViewController()
         solarSystemsViewController.galaxy = galaxy
         solarSystemsViewController.timer = timer
         navigationController?.pushViewController(solarSystemsViewController, animated: true)
-
     }
 }

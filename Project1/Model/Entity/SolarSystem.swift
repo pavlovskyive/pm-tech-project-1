@@ -14,13 +14,13 @@ protocol SolarSystemDelegate: AnyObject {
 final class SolarSystem {
 
     // MARK: - Variables
-    
+
     // Star Delegate.
     weak var starDelegate: StarDelegate?
-    
-    // Solar System Delegate.
-    weak var delegate: SolarSystemDelegate?
-    
+
+    // Solar System Delegates.
+    private let delegates = MulticastDelegate<SolarSystemDelegate>()
+
     // Solar System name.
     private(set) var name: String
 
@@ -32,7 +32,7 @@ final class SolarSystem {
 
     // Planets in Solar System.
     private(set) var planets = [Planet]()
-    
+
     var blackHoleThresholdMass: UInt?
     var blackHoleThresholdRadius: UInt?
 
@@ -42,7 +42,7 @@ final class SolarSystem {
         self.name = name
 
         // Create Host-Star and asign its Solar System to this.
-        star = Star(name: "Hosting Star",
+        star = Star(name: "\(name) Hosting Star",
                     blackHoleThresholdMass: blackHoleThresholdMass ?? 60,
                     blackHoleThresholdRadius: blackHoleThresholdRadius ?? 60)
         star?.delegate = self
@@ -71,16 +71,16 @@ extension SolarSystem {
     // Create new Planet in current Solar System.
     private func newPlanet() {
         let planet = Planet(name: "Planet \(planets.count + 1)", isSatellite: false)
-        
+
         planets.append(planet)
     }
 }
 
-extension SolarSystem: TimerListener {
+extension SolarSystem: TimerDelegate {
 
     // MARK: - Chain of Responsibility
 
-    func handleTick() {
+    public func handleTick() {
 
         // Increase age of current Solar System.
         increaseAge()
@@ -95,11 +95,23 @@ extension SolarSystem: TimerListener {
     }
 }
 
+extension SolarSystem {
+    // MARK: - Delegation
+
+    public func addDelegate(delegate: SolarSystemDelegate) {
+        delegates.add(delegate)
+    }
+
+    public func removeDelegate(delegate: SolarSystemDelegate) {
+        delegates.remove(delegate)
+    }
+}
+
 extension SolarSystem: StarDelegate {
-    func handleBecomingBlackHole(of star: Star) {
-        
+    public func handleBecomingBlackHole(of star: Star) {
+
         starDelegate?.handleBecomingBlackHole(of: star)
-        delegate?.handleDestruction(of: self)
+        delegates.invoke { $0.handleDestruction(of: self) }
         self.star = nil
     }
 }
