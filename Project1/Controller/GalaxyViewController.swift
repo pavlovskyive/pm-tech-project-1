@@ -54,9 +54,9 @@ class GalaxyViewController: BaseViewController {
     override func getCellCount(for section: Int) -> Int {
         switch section {
         case 0:
-            return galaxy?.solarSystems.count ?? 0
+            return galaxy?.storage.filter { $0 is SolarSystem }.count ?? 0
         case 1:
-            return galaxy?.blackHoles.count ?? 0
+            return galaxy?.storage.filter { $0 is Star }.count ?? 0
         default:
             return 0
         }
@@ -78,7 +78,7 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard let solarSystem = galaxy?.solarSystems[indexPath.row] else {
+        guard let solarSystem = galaxy?.storage.filter({ $0 is SolarSystem })[indexPath.row] as? SolarSystem else {
             return cell
         }
 
@@ -97,7 +97,7 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard let blackHole = galaxy?.blackHoles[indexPath.row] else {
+        guard let blackHole = galaxy?.storage.filter({ $0 is Star })[indexPath.row] as? Star else {
             return cell
         }
 
@@ -112,7 +112,7 @@ class GalaxyViewController: BaseViewController {
 
     override func handleCellSelection(indexPath: IndexPath) {
 
-        guard let solarSystem = galaxy?.solarSystems[indexPath.row] else {
+        guard let solarSystem = galaxy?.storage.filter({ $0 is SolarSystem })[indexPath.row] as? SolarSystem else {
             return
         }
 

@@ -130,3 +130,7 @@ extension Star: TimerDelegate {
         }
     }
 }
+
+extension Star: GalaxyContainable {
+
+}

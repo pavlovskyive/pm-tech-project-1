@@ -115,3 +115,7 @@ extension SolarSystem: StarDelegate {
         self.star = nil
     }
 }
+
+extension SolarSystem: GalaxyContainable {
+
+}

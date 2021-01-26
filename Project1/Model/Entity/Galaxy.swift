@@ -18,6 +18,11 @@ protocol GalaxyDelegate: AnyObject {
     func handleDestruction(of galaxy: Galaxy)
 }
 
+protocol GalaxyContainable: TimerDelegate {
+    var name: String { get }
+    var mass: UInt { get }
+}
+
 final class Galaxy {
 
     // MARK: - Variables
@@ -34,11 +39,8 @@ final class Galaxy {
     // Type of Galaxy.
     private(set) var type: GalaxyType
 
-    // Solar systems inside current Galaxy.
-    private(set) var solarSystems = [SolarSystem]()
-
-    // Black holes inside current Galaxy.
-    private(set) var blackHoles = [Star]()
+    // Object that are inside current Galaxy.
+    private(set) var storage = [GalaxyContainable]()
 
     var blackHoleThresholdMass: UInt?
     var blackHoleThresholdRadius: UInt?
@@ -59,7 +61,7 @@ extension Galaxy {
 
     // Mass of Galaxy is computed as sum of all space objects inside it.
     var mass: UInt {
-        solarSystems.reduce(0) { $0 + $1.mass }
+        storage.reduce(0) { $0 + $1.mass }
     }
 }
 
@@ -74,12 +76,13 @@ extension Galaxy {
 
     // Create new Solar System in current Galaxy.
     private func newSolarSystem() {
-        let solarSystemName = "\(name)S\(solarSystems.count + 1)"
+        let solarSystemsCount = storage.filter { $0 is SolarSystem }.count
+        let solarSystemName = "\(name)S\(solarSystemsCount + 1)"
         let solarSystem = SolarSystem(name: solarSystemName)
         solarSystem.addDelegate(delegate: self)
         solarSystem.starDelegate = self
 
-        solarSystems.append(solarSystem)
+        storage.append(solarSystem)
     }
 
     // MARK: - Public Methods
@@ -88,18 +91,16 @@ extension Galaxy {
     public func collide(with galaxy: Galaxy) {
         print("Galaxy \(name) collides with galaxy \(galaxy.name)")
 
-        solarSystems.append(contentsOf: galaxy.solarSystems)
-        blackHoles.append(contentsOf: galaxy.blackHoles)
+        storage.append(contentsOf: galaxy.storage)
 
         galaxy.destroy()
 
-        solarSystems.removeSubrange(0..<solarSystems.count / 10)
+        storage.removeSubrange(0..<storage.count / 10)
     }
 
     // Handle destruction of itself.
     public func destroy() {
-        solarSystems.removeAll()
-        blackHoles.removeAll()
+        storage.removeAll()
 
         delegate?.handleDestruction(of: self)
     }
@@ -120,21 +121,21 @@ extension Galaxy: TimerDelegate {
         }
 
         // Call updates on every Solar System in current Galaxy.
-        solarSystems.forEach { $0.handleTick() }
+        storage.forEach { $0.handleTick() }
     }
 }
 
 extension Galaxy: StarDelegate {
     public func handleBecomingBlackHole(of star: Star) {
-        blackHoles.append(star)
+        storage.append(star)
     }
 }
 
 extension Galaxy: SolarSystemDelegate {
     public func handleDestruction(of solarSystem: SolarSystem) {
-        let index = solarSystems.firstIndex { $0.name == solarSystem.name}
+        let index = storage.firstIndex { $0.name == solarSystem.name}
         if index != nil {
-            solarSystems.remove(at: index!)
+            storage.remove(at: index!)
         }
     }
 }
