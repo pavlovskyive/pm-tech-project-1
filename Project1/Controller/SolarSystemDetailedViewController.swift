@@ -54,14 +54,11 @@ class SolarSystemDetailedViewController: BaseViewController {
             return cell
         }
 
-        let name = planet.name
-        let type = planet.type.rawValue
-        let mass = planet.mass
-        let numberOfSattelites = planet.sattelites.count
+        let representation = planet.cellRepresentation
 
-        cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Type: \(type)\nMass: \(mass)\nSattelites: \(numberOfSattelites)"
-        cell.iconImageView.image = UIImage(systemName: "globe")
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
 
         return cell
     }
@@ -88,20 +85,11 @@ extension SolarSystemDetailedViewController {
             return cell
         }
 
-        let name = star.name
-        let type = star.type.rawValue
-        let stage = star.stage.rawValue
-        let mass = star.mass
-        let temperature = star.temperature
-        let radius = star.radius
-        let luminosity = star.luminosity
+        let representation = star.cellRepresentation
 
-        cell.titleLabel.text = "\(name)"
-        cell.secondaryLabel.text = "Type: \(type)\n" + "Evolution Stage: \(stage)\n" +
-            "Mass: \(mass)    Temperature: \(temperature)\n" +
-            "Radius: \(radius)    Luminosity: \(luminosity)"
-
-        cell.iconImageView.image = UIImage(systemName: "staroflife")
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
 
         return cell
     }

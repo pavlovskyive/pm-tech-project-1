@@ -40,9 +40,11 @@ class UniversesViewController: BaseViewController {
             return cell
         }
 
-        cell.titleLabel.text = universe.name
-        cell.secondaryLabel.text = "Time since creation: \(universe.age)"
-        cell.iconImageView.image = UIImage(systemName: "infinity")
+        let representation = universe.cellRepresentation
+
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
 
         return cell
     }

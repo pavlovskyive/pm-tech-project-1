@@ -78,18 +78,22 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard let solarSystem = galaxy?.storage.filter({ $0 is SolarSystem })[indexPath.row] as? SolarSystem else {
+        guard galaxy?.storage.count ?? 0 > indexPath.row else {
             return cell
         }
 
-        let name = solarSystem.name
-        let starType = solarSystem.star?.type.rawValue ?? ""
-        let planetNumber = solarSystem.planets.count
+        guard let solarSystems = galaxy?.storage.filter({ $0 is SolarSystem }),
+              solarSystems.count > indexPath.row,
+              let solarSystem = solarSystems[indexPath.row] as? SolarSystem else {
+            return cell
+        }
 
-        cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Star Type: \(starType)\n" +
-            "Number of Planets: \(planetNumber)"
-        cell.iconImageView.image = UIImage(systemName: "smallcircle.fill.circle")
+        let representation = solarSystem.cellRepresentation
+
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
+
         return cell
     }
 
@@ -97,16 +101,18 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard let blackHole = galaxy?.storage.filter({ $0 is Star })[indexPath.row] as? Star else {
+        guard let blackHoles = galaxy?.storage.filter({ $0 is Star }),
+              blackHoles.count > indexPath.row,
+              let blackHole = blackHoles[indexPath.row] as? Star else {
             return cell
         }
 
-        let name = blackHole.name
-        let stage = blackHole.stage.rawValue
+        let representation = blackHole.cellRepresentation
 
-        cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Stage: \(stage)"
-        cell.iconImageView.image = UIImage(systemName: "smallcircle.fill.circle.fill")
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
+
         return cell
     }
 

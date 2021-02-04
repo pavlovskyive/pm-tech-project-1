@@ -35,25 +35,11 @@ class GalaxiesViewController: BaseViewController {
             return cell
         }
 
-        let name = galaxy.name
-        let age = galaxy.age
-        let type = galaxy.type.rawValue
-        let mass = galaxy.mass
+        let representation = galaxy.cellRepresentation
 
-        var image: UIImage
-
-        switch galaxy.type {
-        case .spiral:
-            image = UIImage(systemName: "hurricane")!
-        case .elliptical:
-            image = UIImage(systemName: "circlebadge.fill")!
-        default:
-            image = UIImage(systemName: "aqi.low")!
-        }
-
-        cell.titleLabel.text = name
-        cell.secondaryLabel.text = "Type: \(type)\nAge: \(age)\nMass: \(mass)"
-        cell.iconImageView.image = image
+        cell.titleLabel.text = representation.name
+        cell.secondaryLabel.text = representation.description
+        cell.iconImageView.image = representation.icon
 
         return cell
     }

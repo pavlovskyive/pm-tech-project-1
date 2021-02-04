@@ -81,6 +81,14 @@ final class RoundedCollectionViewCell: UICollectionViewCell {
         contentView.frame = bounds
         gradientLayer.frame = bounds
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        titleLabel.text = ""
+        secondaryLabel.text = ""
+        iconImageView.image = nil
+    }
 }
 
 extension RoundedCollectionViewCell {
