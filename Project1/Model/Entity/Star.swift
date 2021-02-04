@@ -96,6 +96,15 @@ extension Star {
     // Get last stage based on Star parameters.
     private func getFinalStage() -> StarStage {
         if mass >= massThreshold && radius >= radiusThreshold {
+            /*
+             Mentor's comment:
+             This isn't a mistake, but I'd rather move this line somewhere else.
+             Why? I think by placing this code here u introduce a side effect for this simple
+             function which may be unexpected keeping it's name in mind.
+             
+             Look for some info about pure functions. Even if we're not diving deep into functional programming,
+             there are still some concepts to keep in mind for the sake of readability and maintainability.
+             */
             handleBecomingBlackHole()
             return .blackHole
         }

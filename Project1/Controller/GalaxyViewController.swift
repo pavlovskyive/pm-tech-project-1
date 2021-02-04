@@ -32,6 +32,12 @@ class GalaxyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /*
+         Mentor's comment:
+         It's better to put this expression inside the viewDidAppear method.
+         Because viewDidLoad is called only once, but viewDidDisappear may be called several times
+         the code may end in an unexpected behavior.
+         */
         galaxy?.delegate = self
     }
 
@@ -97,6 +103,18 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
+        /*
+         Mentor's comment:
+         galaxy?.storage.filter({ $0 is Star })[indexPath.row]
+         I'd rather put this code into Galaxy. In general it's a good idea not to reach into guts
+         of an another class/struct – remember about data/functionality incapsulation to avoid
+         "spaghetti code".
+         
+         By doing so u can transform the code below to something like:
+         guard let blackHole = galaxy?.star(at: indexPath.row) else {
+             return cell
+         }
+         */
         guard let blackHole = galaxy?.storage.filter({ $0 is Star })[indexPath.row] as? Star else {
             return cell
         }
@@ -112,6 +130,14 @@ class GalaxyViewController: BaseViewController {
 
     override func handleCellSelection(indexPath: IndexPath) {
 
+        /*
+         Mentor's comment:
+         See my comment above.
+         
+         And there is a bug here 🐞. You're requesting a solar system only by it's row. In case user
+         clicks on a blackhole (which is in another section) the code below will handle this event
+         as though user clicked on a solar system in the first section.
+         */
         guard let solarSystem = galaxy?.storage.filter({ $0 is SolarSystem })[indexPath.row] as? SolarSystem else {
             return
         }
@@ -132,6 +158,10 @@ extension GalaxyViewController: GalaxyDelegate {
         if galaxy === self.galaxy {
             self.galaxy = nil
             DispatchQueue.main.async { [weak self] in
+                /*
+                 Mentor's comment:
+                 Looks like the timer must be resumed somewhere after suspending it here 🤨
+                 */
                 self?.timer?.suspend()
                 self?.navigationController?.popViewController(animated: true)
                 self?.showAlert(title: "Current Galaxy has been destroyed",
