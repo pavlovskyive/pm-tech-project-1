@@ -22,8 +22,8 @@ class SolarSystemDetailedViewController: BaseViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         solarSystem?.addDelegate(delegate: self)
     }

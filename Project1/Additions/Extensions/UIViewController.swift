@@ -18,5 +18,3 @@ extension UIViewController {
         self.navigationController?.present(alertController, animated: true)
     }
 }
-
-

@@ -29,8 +29,8 @@ class GalaxyViewController: BaseViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         galaxy?.delegate = self
     }
