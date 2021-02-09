@@ -43,7 +43,11 @@ final class Star {
     private(set) var type = StarType.allCases.randomElement()!
 
     // Current Star stage.
-    private(set) var stage: StarStage = .babyStar
+    private(set) var stage: StarStage = .babyStar {
+        didSet {
+            if stage == .blackHole { handleBecomingBlackHole() }
+        }
+    }
 
     // Mass of Star.
     private(set) var mass = UInt.random(in: 1...100)
@@ -96,7 +100,6 @@ extension Star {
     // Get last stage based on Star parameters.
     private func getFinalStage() -> StarStage {
         if mass >= massThreshold && radius >= radiusThreshold {
-            handleBecomingBlackHole()
             return .blackHole
         }
         return .dwarf
