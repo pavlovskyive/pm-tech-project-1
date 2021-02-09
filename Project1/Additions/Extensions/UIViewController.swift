@@ -12,7 +12,7 @@ extension UIViewController {
         let alertController = UIAlertController(
             title: title, message: message, preferredStyle: .alert)
 
-        let OKAction = UIAlertAction(title: "OK", style: .default) {_ in 
+        let OKAction = UIAlertAction(title: "OK", style: .default) {_ in
             if let completion = completion {
                 completion()
             }

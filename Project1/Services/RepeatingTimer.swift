@@ -13,7 +13,7 @@ import Foundation
 
 class RepeatingTimer {
 
-    var timeInterval: TimeInterval
+    private var timeInterval: TimeInterval
 
     init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
