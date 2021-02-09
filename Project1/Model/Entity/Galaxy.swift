@@ -60,7 +60,7 @@ extension Galaxy {
     // MARK: - Computed Variables
 
     // Mass of Galaxy is computed as sum of all space objects inside it.
-    var mass: UInt {
+    public var mass: UInt {
         storage.reduce(0) { $0 + $1.mass }
     }
 }
@@ -86,6 +86,26 @@ extension Galaxy {
     }
 
     // MARK: - Public Methods
+    
+    public func solarSystem(at index: Int) -> SolarSystem? {
+        let solarSystems = storage.filter({ $0 is SolarSystem })
+        guard solarSystems.count > index,
+              let solarSystem = solarSystems[index] as? SolarSystem else {
+            return nil
+        }
+
+        return solarSystem
+    }
+    
+    public func star(at index: Int) -> Star? {
+        let stars = storage.filter({ $0 is Star })
+        guard stars.count > index,
+              let star = stars[index] as? Star else {
+            return nil
+        }
+
+        return star
+    }
 
     // Collide with another Galaxy.
     public func collide(with galaxy: Galaxy) {

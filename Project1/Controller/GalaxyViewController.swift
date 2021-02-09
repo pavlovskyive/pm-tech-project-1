@@ -78,13 +78,7 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard galaxy?.storage.count ?? 0 > indexPath.row else {
-            return cell
-        }
-
-        guard let solarSystems = galaxy?.storage.filter({ $0 is SolarSystem }),
-              solarSystems.count > indexPath.row,
-              let solarSystem = solarSystems[indexPath.row] as? SolarSystem else {
+        guard let solarSystem = galaxy?.solarSystem(at: indexPath.row) else {
             return cell
         }
 
@@ -101,9 +95,7 @@ class GalaxyViewController: BaseViewController {
         cell: RoundedCollectionViewCell,
         indexPath: IndexPath) -> RoundedCollectionViewCell {
 
-        guard let blackHoles = galaxy?.storage.filter({ $0 is Star }),
-              blackHoles.count > indexPath.row,
-              let blackHole = blackHoles[indexPath.row] as? Star else {
+        guard let blackHole = galaxy?.star(at: indexPath.row) else {
             return cell
         }
 

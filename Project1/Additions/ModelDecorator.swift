@@ -65,7 +65,7 @@ extension Star: CellRepresentable {
             description = "Stage: Black Hole"
             image = UIImage(systemName: "smallcircle.fill.circle.fill")
         default:
-            description = "Type: \(type)\n" + "Evolution Stage: \(stage)\n" +
+            description = "Type: \(type.rawValue)\n" + "Evolution Stage: \(stage.rawValue)\n" +
                 "Mass: \(mass)    Temperature: \(temperature)\n" +
                 "Radius: \(radius)    Luminosity: \(luminosity)"
             image = UIImage(systemName: "smallcircle.fill.circle")
