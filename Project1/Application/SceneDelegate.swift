@@ -22,14 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         timer.resume()
         let storage = Storage()
 
+        timer.addDelegate(storage)
+
         let viewController = UniversesViewController()
 
         let navigationController = UINavigationController(rootViewController: viewController)
 
         viewController.storage = storage
         viewController.timer = timer
-
-        timer.addDelegate(storage)
 
         window.rootViewController = navigationController
 

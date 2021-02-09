@@ -31,7 +31,6 @@
 		79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3D25B2DF4800761D31 /* Planet.swift */; };
 		79C26E4425B2E07900761D31 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E4325B2E07900761D31 /* Storage.swift */; };
 		79C4EBC125BD70B000488ACC /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EBC025BD70B000488ACC /* MulticastDelegate.swift */; };
-		79DB5E0625B5850F007CBC7E /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB5E0525B5850F007CBC7E /* Weak.swift */; };
 		79F520B325B309850001F60E /* GalaxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B225B309850001F60E /* GalaxyViewController.swift */; };
 		79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +62,6 @@
 		79C26E3D25B2DF4800761D31 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		79C26E4325B2E07900761D31 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		79C4EBC025BD70B000488ACC /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
-		79DB5E0525B5850F007CBC7E /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		79F520B225B309850001F60E /* GalaxyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyViewController.swift; sourceTree = "<group>"; };
 		79F520B525B3164B0001F60E /* SolarSystemDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystemDetailedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +165,6 @@
 			children = (
 				79905ABA25D2779700266CD1 /* Extensions */,
 				796A0F2525B41A9600DA3F9F /* CollectionView */,
-				79DB5E0525B5850F007CBC7E /* Weak.swift */,
 				79C4EBC025BD70B000488ACC /* MulticastDelegate.swift */,
 				796FE3CD25CBF5A000B77A1D /* ModelDecorator.swift */,
 			);
@@ -326,7 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */,
-				79DB5E0625B5850F007CBC7E /* Weak.swift in Sources */,
 				794F29B325B058D8007FF79F /* Universe.swift in Sources */,
 				7915BDE025B6134900F3CCA8 /* BaseViewController.swift in Sources */,
 				79905ABD25D2781A00266CD1 /* UIViewController.swift in Sources */,

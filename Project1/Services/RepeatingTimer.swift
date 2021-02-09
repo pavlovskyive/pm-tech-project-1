@@ -21,7 +21,7 @@ class RepeatingTimer {
 
     lazy private var timer: DispatchSourceTimer = setTimer()
 
-    var delegates = MulticastDelegate<TimerDelegate>()
+    private var delegates = MulticastDelegate<TimerDelegate>()
 
     enum State: Int {
         case suspended = 0
@@ -46,15 +46,19 @@ class RepeatingTimer {
         return timeSource
     }
 
-    func timerEvent() {
+    private func timerEvent() {
         delegates.invoke { $0.handleTick() }
     }
 
-    func addDelegate(_ delegate: TimerDelegate) {
+    public func addDelegate(_ delegate: TimerDelegate) {
         delegates.add(delegate)
     }
 
-    func resume() {
+    public func removeDelegate(_ delegate: TimerDelegate) {
+        delegates.remove(delegate)
+    }
+
+    public func resume() {
 
         switch state {
         case .faster:
@@ -70,7 +74,7 @@ class RepeatingTimer {
         }
     }
 
-    func suspend() {
+    public func suspend() {
         if state == .suspended {
             return
         }
@@ -78,7 +82,7 @@ class RepeatingTimer {
         timer.cancel()
     }
 
-    func faster() {
+    public func faster() {
 
         switch state {
         case .resumed:
