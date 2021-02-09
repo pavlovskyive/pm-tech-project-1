@@ -86,7 +86,7 @@ extension Galaxy {
     }
 
     // MARK: - Public Methods
-    
+
     public func solarSystem(at index: Int) -> SolarSystem? {
         let solarSystems = storage.filter({ $0 is SolarSystem })
         guard solarSystems.count > index,
@@ -96,7 +96,7 @@ extension Galaxy {
 
         return solarSystem
     }
-    
+
     public func star(at index: Int) -> Star? {
         let stars = storage.filter({ $0 is Star })
         guard stars.count > index,

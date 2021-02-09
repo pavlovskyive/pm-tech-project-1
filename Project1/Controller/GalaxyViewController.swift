@@ -110,7 +110,8 @@ class GalaxyViewController: BaseViewController {
 
     override func handleCellSelection(indexPath: IndexPath) {
 
-        guard let solarSystem = galaxy?.storage.filter({ $0 is SolarSystem })[indexPath.row] as? SolarSystem else {
+        guard indexPath.section == 0,
+              let solarSystem = galaxy?.solarSystem(at: indexPath.row) else {
             return
         }
 
