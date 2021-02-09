@@ -101,9 +101,12 @@ extension SolarSystemDetailedViewController: SolarSystemDelegate {
             self.solarSystem = nil
             DispatchQueue.main.async { [weak self] in
                 self?.timer?.suspend()
-                self?.navigationController?.popViewController(animated: true)
-                self?.showAlert(title: "Current Solar System has been destroyed",
-                          message: "You've been redirected to the previous screen")
+                self?.showAlert(
+                    title: "Current Solar System has been destroyed",
+                    message: "You will be redirected to previous screen") {
+                    self?.timer?.resume()
+                    self?.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
