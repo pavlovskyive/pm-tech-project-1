@@ -95,10 +95,6 @@ extension SolarSystemDetailedViewController {
     }
 }
 
-extension SolarSystemDetailedViewController: Alertable {
-
-}
-
 extension SolarSystemDetailedViewController: SolarSystemDelegate {
     func handleDestruction(of solarSystem: SolarSystem) {
         if solarSystem === self.solarSystem {

@@ -1,17 +1,13 @@
 //
-//  Alertable.swift
+//  UIViewController.swift
 //  Project1
 //
-//  Created by Vsevolod Pavlovskyi on 24.01.2021.
+//  Created by Vsevolod Pavlovskyi on 09.02.2021.
 //
 
 import UIKit
 
-protocol Alertable: UIViewController {
-    func showAlert(title: String, message: String)
-}
-
-extension Alertable {
+extension UIViewController {
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(
             title: title, message: message, preferredStyle: .alert)
@@ -22,3 +18,5 @@ extension Alertable {
         self.navigationController?.present(alertController, animated: true)
     }
 }
+
+

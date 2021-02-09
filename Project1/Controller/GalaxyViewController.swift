@@ -129,10 +129,6 @@ class GalaxyViewController: BaseViewController {
     }
 }
 
-extension GalaxyViewController: Alertable {
-
-}
-
 extension GalaxyViewController: GalaxyDelegate {
     func handleDestruction(of galaxy: Galaxy) {
         if galaxy === self.galaxy {

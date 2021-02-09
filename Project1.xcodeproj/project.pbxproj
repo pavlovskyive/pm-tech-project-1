@@ -11,8 +11,7 @@
 		7904608025B18ED1003EEEC2 /* UniversesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */; };
 		7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */; };
 		79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */; };
-		7907A8ED25BD9A6800E9937D /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907A8EC25BD9A6800E9937D /* Alertable.swift */; };
-		7915BDDD25B6095700F3CCA8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7915BDDC25B6095700F3CCA8 /* Extension.swift */; };
+		7915BDDD25B6095700F3CCA8 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7915BDDC25B6095700F3CCA8 /* UINavigationController.swift */; };
 		7915BDE025B6134900F3CCA8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7915BDDF25B6134900F3CCA8 /* BaseViewController.swift */; };
 		794F298D25B03548007FF79F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298C25B03548007FF79F /* AppDelegate.swift */; };
 		794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794F298E25B03548007FF79F /* SceneDelegate.swift */; };
@@ -25,6 +24,7 @@
 		796A0F2325B4144A00DA3F9F /* DoubleColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */; };
 		796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */; };
 		796FE3CE25CBF5A000B77A1D /* ModelDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FE3CD25CBF5A000B77A1D /* ModelDecorator.swift */; };
+		79905ABD25D2781A00266CD1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79905ABC25D2781A00266CD1 /* UIViewController.swift */; };
 		79A4BA7F25B1DEDA00CA7AD9 /* SolarSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */; };
 		79C26E3725B2BE7A00761D31 /* GalaxiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */; };
 		79C26E3B25B2DF3100761D31 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C26E3A25B2DF3100761D31 /* Star.swift */; };
@@ -41,8 +41,7 @@
 		7904607F25B18ED1003EEEC2 /* UniversesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversesViewController.swift; sourceTree = "<group>"; };
 		7904608225B18F38003EEEC2 /* RoundedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionViewCell.swift; sourceTree = "<group>"; };
 		79078B6325B4485D0043B6E8 /* TimerSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSegmentedControl.swift; sourceTree = "<group>"; };
-		7907A8EC25BD9A6800E9937D /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
-		7915BDDC25B6095700F3CCA8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		7915BDDC25B6095700F3CCA8 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		7915BDDF25B6134900F3CCA8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		794F298925B03548007FF79F /* Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794F298C25B03548007FF79F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		796A0F2225B4144A00DA3F9F /* DoubleColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnFlowLayout.swift; sourceTree = "<group>"; };
 		796A0F3325B43E8500DA3F9F /* DoubleColumnCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumnCollectionView.swift; sourceTree = "<group>"; };
 		796FE3CD25CBF5A000B77A1D /* ModelDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDecorator.swift; sourceTree = "<group>"; };
+		79905ABC25D2781A00266CD1 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		79A4BA7E25B1DEDA00CA7AD9 /* SolarSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarSystem.swift; sourceTree = "<group>"; };
 		79C26E3625B2BE7A00761D31 /* GalaxiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxiesViewController.swift; sourceTree = "<group>"; };
 		79C26E3A25B2DF3100761D31 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
@@ -165,11 +165,10 @@
 		796A28C725B410BC00BD3849 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				79905ABA25D2779700266CD1 /* Extensions */,
 				796A0F2525B41A9600DA3F9F /* CollectionView */,
 				79DB5E0525B5850F007CBC7E /* Weak.swift */,
-				7915BDDC25B6095700F3CCA8 /* Extension.swift */,
 				79C4EBC025BD70B000488ACC /* MulticastDelegate.swift */,
-				7907A8EC25BD9A6800E9937D /* Alertable.swift */,
 				796FE3CD25CBF5A000B77A1D /* ModelDecorator.swift */,
 			);
 			path = Additions;
@@ -204,6 +203,15 @@
 				794F299725B0354B007FF79F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		79905ABA25D2779700266CD1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7915BDDC25B6095700F3CCA8 /* UINavigationController.swift */,
+				79905ABC25D2781A00266CD1 /* UIViewController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		79B87CDD25B4867A003EC34C /* StateMachine */ = {
@@ -321,9 +329,9 @@
 				79DB5E0625B5850F007CBC7E /* Weak.swift in Sources */,
 				794F29B325B058D8007FF79F /* Universe.swift in Sources */,
 				7915BDE025B6134900F3CCA8 /* BaseViewController.swift in Sources */,
+				79905ABD25D2781A00266CD1 /* UIViewController.swift in Sources */,
 				7904608325B18F38003EEEC2 /* RoundedCollectionViewCell.swift in Sources */,
 				79C26E3B25B2DF3100761D31 /* Star.swift in Sources */,
-				7907A8ED25BD9A6800E9937D /* Alertable.swift in Sources */,
 				7904607C25B0DDFA003EEEC2 /* RepeatingTimer.swift in Sources */,
 				79C26E3E25B2DF4800761D31 /* Planet.swift in Sources */,
 				79F520B625B3164B0001F60E /* SolarSystemDetailedViewController.swift in Sources */,
@@ -334,7 +342,7 @@
 				796A0F2325B4144A00DA3F9F /* DoubleColumnFlowLayout.swift in Sources */,
 				794F298F25B03548007FF79F /* SceneDelegate.swift in Sources */,
 				796A0F3425B43E8500DA3F9F /* DoubleColumnCollectionView.swift in Sources */,
-				7915BDDD25B6095700F3CCA8 /* Extension.swift in Sources */,
+				7915BDDD25B6095700F3CCA8 /* UINavigationController.swift in Sources */,
 				79078B6425B4485D0043B6E8 /* TimerSegmentedControl.swift in Sources */,
 				79C26E4425B2E07900761D31 /* Storage.swift in Sources */,
 				796FE3CE25CBF5A000B77A1D /* ModelDecorator.swift in Sources */,
